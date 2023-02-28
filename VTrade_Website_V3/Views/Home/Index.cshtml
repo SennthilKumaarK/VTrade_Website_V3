@@ -1,0 +1,141 @@
+﻿<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+        <h1>Welcome to Vtrade Goods</h1>
+        <h2>We are the team of talented product sellers with assurance</h2>
+        <div class="d-flex">
+            <a href="@Url.Action("Index", "Product")" class="btn-get-started scrollto">Get All Products</a>
+            <!--<a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+        </div>
+    </div>
+</section>
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about about-bg">
+    <div class="container" data-aos="fade-left">
+        <div class="section-title">
+            <h3> <span>Who We Are?</span></h3>
+
+            <div class="row" style="margin-top: 15px;">
+
+                <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100"> <img src="/assets/img/about.jpg" class="img-fluid" alt="" style="height: 400px !important;"> </div>
+                <div class="col-lg-7 pt-4 pt-lg-0 indexcontent d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                    <ul>
+                        <li>
+                            <i class="bx bx-images"></i>
+                            <div>
+                                <p style="text-align: justify !important;line-height: 30px;margin:0px !important;font-weight: normal !important;font-size:18px;">Vtrade Goods wholesalers Co.L.L.C is one of the leading foodservice distributors, exporters and importers of superior quality food and non - food products.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="bx bx-images"></i>
+                            <div>
+                                <p style="text-align: justify !important;line-height: 30px;margin:0px !important;font-weight: normal !important;font-size:18px;">With 15 years of experience in fmcg sector and consolidation containers make us to give unique way to our clients to maximise their profits.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="bx bx-images"></i>
+                            <div>
+                                <p style="text-align: justify !important;line-height: 30px;margin:0px !important;font-weight: normal !important;font-size:18px;">Specialised in developing customised labels based on the client's request, we at Vtrade pride ourselves on offering an exceptional blend of premium quality food ingredients and value-added services to our valued clients over the years.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ======= Category Section ======= -->
+<section id="Category" class="portfolio category-bg">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h3> <span style="color:#fff;">Our Categories</span></h3>
+        </div>
+        <div class="row" id="lstCategoryItems">
+        </div>
+    </div>
+
+</section>
+<!-- End Category Section -->
+<!-- ======= why-vtrade Section ======= -->
+<section id="whyvtrade" class="why-vtrade-bg">
+    <div class="container" data-aos="fade-right">
+        <div class="section-title">
+            <h3>  <span>Why We Are?</span></h3>
+            <p class="border-green">We offer the finest range of premium products including dry, Chilled and frozen catering to the needs of the FMCG service, retail and wholesale markets at the best prices.</p>
+            <p class="border-red">Vtrade pride itself on being a leading supply partner to most of the five-star hotels, dining restaurants, catering companies, bakeries, ship chandling, airlines, cruise lines, hospitals worldwide.</p>
+        </div>
+    </div>
+</section>
+<!-- End why-vtrade Section -->
+<!-- ======= Product Section ======= -->
+<section id="portfolio" class="portfolio products-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h3> <span>Our New Products</span></h3>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="200" id="lstProductItems">
+        </div>
+    </div>
+</section>
+<!-- End Product Section -->
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        GetCategoryItems();
+        GetProductItems();
+    });
+
+    function GetCategoryItems() {
+
+        var getCategoryItemsURL = '@Url.Action("GetProductCategories", "Home")';
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: getCategoryItemsURL,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.ResponseSuccess == true) {
+                        //alert('success');
+                        $('#lstCategoryItems').html(result.ResponseMessage);
+                    }
+                    else {
+                        //alert(result.ResponseMessage);
+                    }
+                },
+            });
+    }
+
+     function GetProductItems() {
+
+        var getProductItemsURL = '@Url.Action("GetProductItems", "Home")';
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: getProductItemsURL,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.ResponseSuccess == true) {
+                        //alert('success');
+                        $('#lstProductItems').html(result.ResponseMessage);
+                    }
+                    else {
+                        //alert('fail');
+                    }
+                },
+            });
+    }
+</script>

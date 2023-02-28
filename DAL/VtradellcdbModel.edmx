@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VtradellcdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BrandItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="85" Nullable="false" />
+          <Property Name="BrandDesc" Type="varchar" MaxLength="255" />
+          <Property Name="BrandImgPath" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CategoryItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="85" Nullable="false" />
+          <Property Name="CategoryDesc" Type="varchar" MaxLength="255" />
+          <Property Name="CategoryImgPath" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ContactDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactMessage" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ContactDate" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="ContactTime" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductImageList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductImgPath" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="KeyName" Type="varchar" MaxLength="85" />
+          <Property Name="KeyValue" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ProductItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatID" Type="int" />
+          <Property Name="BrandID" Type="int" />
+          <Property Name="ProductName" Type="varchar" MaxLength="85" Nullable="false" />
+          <Property Name="ProductDesc" Type="varchar" MaxLength="2000" />
+          <Property Name="ProductImgPath" Type="varchar" MaxLength="255" />
+          <Property Name="ProductOrder" Type="int" />
+          <Property Name="ProductPopular" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SubscribeDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscribeEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubscribeDate" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="SubscribeTime" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="15" />
+          <Property Name="USERPASSWORD" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="VisitorAnalytics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ANTRDATE" Type="varchar" MaxLength="8" />
+          <Property Name="ANTRTIME" Type="varchar" MaxLength="9" />
+          <Property Name="ANSESID" Type="varchar" MaxLength="50" />
+          <Property Name="ANIPDET" Type="varchar" MaxLength="50" />
+          <Property Name="ANBROW" Type="varchar" MaxLength="20" />
+          <Property Name="ANBROWVER" Type="varchar" MaxLength="10" />
+          <Property Name="ANOPRSYS" Type="varchar" MaxLength="10" />
+          <Property Name="ANTRYEAR" Type="varchar" MaxLength="4" />
+          <Property Name="ANTRMONTH" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityContainer Name="VtradellcdbModelStoreContainer">
+          <EntitySet Name="BrandItems" EntityType="Self.BrandItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactDetails" EntityType="Self.ContactDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImageList" EntityType="Self.ProductImageList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductItems" EntityType="Self.ProductItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscribeDetails" EntityType="Self.SubscribeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitorAnalytics" EntityType="Self.VisitorAnalytics" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VtradellcdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BrandItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="85" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrandDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BrandImgPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CategoryItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="85" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryImgPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ContactDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactDate" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactTime" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductImageList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductImgPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="KeyName" Type="String" MaxLength="85" FixedLength="false" Unicode="false" />
+          <Property Name="KeyValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatID" Type="Int32" />
+          <Property Name="BrandID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="85" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductDesc" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductImgPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ProductOrder" Type="Int32" />
+          <Property Name="ProductPopular" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SubscribeDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscribeEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubscribeDate" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubscribeTime" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="USERPASSWORD" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VisitorAnalytic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ANTRDATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ANTRTIME" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="ANSESID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ANIPDET" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ANBROW" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ANBROWVER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ANOPRSYS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ANTRYEAR" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="ANTRMONTH" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="VtradellcdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BrandItems" EntityType="Self.BrandItem" />
+          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItem" />
+          <EntitySet Name="ContactDetails" EntityType="Self.ContactDetail" />
+          <EntitySet Name="ProductImageLists" EntityType="Self.ProductImageList" />
+          <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
+          <EntitySet Name="ProductItems" EntityType="Self.ProductItem" />
+          <EntitySet Name="SubscribeDetails" EntityType="Self.SubscribeDetail" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="VisitorAnalytics" EntityType="Self.VisitorAnalytic" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VtradellcdbModelStoreContainer" CdmEntityContainer="VtradellcdbEntities">
+          <EntitySetMapping Name="BrandItems">
+            <EntityTypeMapping TypeName="VtradellcdbModel.BrandItem">
+              <MappingFragment StoreEntitySet="BrandItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandDesc" ColumnName="BrandDesc" />
+                <ScalarProperty Name="BrandImgPath" ColumnName="BrandImgPath" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryItems">
+            <EntityTypeMapping TypeName="VtradellcdbModel.CategoryItem">
+              <MappingFragment StoreEntitySet="CategoryItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryDesc" ColumnName="CategoryDesc" />
+                <ScalarProperty Name="CategoryImgPath" ColumnName="CategoryImgPath" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactDetails">
+            <EntityTypeMapping TypeName="VtradellcdbModel.ContactDetail">
+              <MappingFragment StoreEntitySet="ContactDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="ContactMessage" ColumnName="ContactMessage" />
+                <ScalarProperty Name="ContactDate" ColumnName="ContactDate" />
+                <ScalarProperty Name="ContactTime" ColumnName="ContactTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImageLists">
+            <EntityTypeMapping TypeName="VtradellcdbModel.ProductImageList">
+              <MappingFragment StoreEntitySet="ProductImageList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductImgPath" ColumnName="ProductImgPath" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfoes">
+            <EntityTypeMapping TypeName="VtradellcdbModel.ProductInfo">
+              <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductItems">
+            <EntityTypeMapping TypeName="VtradellcdbModel.ProductItem">
+              <MappingFragment StoreEntitySet="ProductItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDesc" ColumnName="ProductDesc" />
+                <ScalarProperty Name="ProductImgPath" ColumnName="ProductImgPath" />
+                <ScalarProperty Name="ProductOrder" ColumnName="ProductOrder" />
+                <ScalarProperty Name="ProductPopular" ColumnName="ProductPopular" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscribeDetails">
+            <EntityTypeMapping TypeName="VtradellcdbModel.SubscribeDetail">
+              <MappingFragment StoreEntitySet="SubscribeDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubscribeEmail" ColumnName="SubscribeEmail" />
+                <ScalarProperty Name="SubscribeDate" ColumnName="SubscribeDate" />
+                <ScalarProperty Name="SubscribeTime" ColumnName="SubscribeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="VtradellcdbModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorAnalytics">
+            <EntityTypeMapping TypeName="VtradellcdbModel.VisitorAnalytic">
+              <MappingFragment StoreEntitySet="VisitorAnalytics">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ANTRDATE" ColumnName="ANTRDATE" />
+                <ScalarProperty Name="ANTRTIME" ColumnName="ANTRTIME" />
+                <ScalarProperty Name="ANSESID" ColumnName="ANSESID" />
+                <ScalarProperty Name="ANIPDET" ColumnName="ANIPDET" />
+                <ScalarProperty Name="ANBROW" ColumnName="ANBROW" />
+                <ScalarProperty Name="ANBROWVER" ColumnName="ANBROWVER" />
+                <ScalarProperty Name="ANOPRSYS" ColumnName="ANOPRSYS" />
+                <ScalarProperty Name="ANTRYEAR" ColumnName="ANTRYEAR" />
+                <ScalarProperty Name="ANTRMONTH" ColumnName="ANTRMONTH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

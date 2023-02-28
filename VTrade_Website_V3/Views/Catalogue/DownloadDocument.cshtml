@@ -1,0 +1,54 @@
+﻿<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs breadcrumbs2 catalogue">
+    <div class="boxedeb">
+        <div class="container page-block-small">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2>
+                    E-Catalogue
+                </h2>
+                <span class="line">
+                </span>
+                <div class="rightText">
+                    <a href="@Url.Action("Index", "Home")" title="Home">Home</a>
+                    / E-Catalogue
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+
+<section class="inner-page" style="padding: 0px 0 !important;">
+
+    <div class="download-page">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6" style="border: 4px solid aliceblue; padding: 5%;">
+                    <i class="bi bi-download" style="font-size:150px;color:#232c3a;"></i>
+                    <h4>Vtrade_Goods.pdf file is download complete</h4>
+
+                    <a href="../assets/docx/Vtrade_Goods.pdf" id="download-link" download>
+                        Click here to download again
+                    </a>
+                    <div class="form-row">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        download();
+    });
+    function download() {
+        var element = document.getElementById('download-link');
+        element.click();
+    }
+</script>

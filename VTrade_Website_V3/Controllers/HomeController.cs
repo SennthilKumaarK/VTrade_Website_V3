@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using VTrade_Website_V3.Models;
+using DAL;
+
+namespace VTrade_Website_V3.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetProductCategories()
+        {
+            ResponseData res = new ResponseData();
+
+            try
+            {
+                Repository Repobj = new Repository();
+                _getCategoryItems _getCategoryItemsObj = new _getCategoryItems();
+                _getCategoryItemsObj = Repobj.getCategoryItems();
+
+                if (_getCategoryItemsObj.ResponseStatus == true)
+                {
+                    List<CategoryItem> lstObj = new List<CategoryItem>();
+                    lstObj = _getCategoryItemsObj.lstCategoryItem;
+                    string str_responseData = "";
+
+                    if (lstObj != null)
+                    {
+                        foreach (CategoryItem varCategoryListItem in lstObj)
+                        {
+                            str_responseData += "<div class='col-lg-4 col-md-6 portfolio-item portfolio-item-index'> <a href='/Product?CategoryID=" + varCategoryListItem.ID + "'><img src='" + varCategoryListItem.CategoryImgPath + "' class='imgProduct' alt=''/></a>";
+                            str_responseData += "<div class='portfolio-info'><a href='/product?CategoryID=" + varCategoryListItem.ID + "'>";
+                            str_responseData += varCategoryListItem.CategoryName;
+                            str_responseData += "</a></div>";
+                            str_responseData += "</div>";
+                        }
+                    }
+
+                    res.ResponseSuccess = true;
+                    res.ResponseMessage = str_responseData;
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+            }
+            catch (Exception)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public JsonResult GetProductItems()
+        {
+            ResponseData res = new ResponseData();
+            try
+            {
+                Repository Repobj = new Repository();
+                _getProductItems _getProductItemsObj = new _getProductItems();
+                _getProductItemsObj = Repobj.getProductItems();
+
+                if (_getProductItemsObj.ResponseStatus == true)
+                {
+                    List<ProductListInfo> lstObj = new List<ProductListInfo>();
+                    lstObj = _getProductItemsObj.lstProductItem;
+                    string str_responseData = "";
+
+                    if (lstObj != null)
+                    {
+                        foreach (ProductListInfo varProductListInfo in lstObj)
+                        {
+                            str_responseData += "<div class='col-lg-4 col-md-6 portfolio-item'> <a href='/Product/ProductDetail?ProductID=" + varProductListInfo.ID + "'><img src='" + varProductListInfo.ProductImgPath + "' class='img-Product' alt=''/></a>";
+                            str_responseData += "<div class='portfolio-info'><a href='/Product/ProductDetail?ProductID=" + varProductListInfo.ID + "'>";
+                            str_responseData += "<h4>" + varProductListInfo.ProductName + "</h4>";
+                            str_responseData += "<p>" + varProductListInfo.BrandName + "</p><span class='details-link'>" + varProductListInfo.CategoryName + "</span>";
+                            str_responseData += "</a></div>";
+                            str_responseData += "</div>";
+                        }
+                    }
+
+                    res.ResponseSuccess = true;
+                    res.ResponseMessage = str_responseData;
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AddSubscribeEmail(string subcribeemailaddress)
+        {
+            ResponseData res = new ResponseData();
+            try
+            {
+                Repository Repobj = new Repository();
+                _getUpdateStatus _setSubscribeEmailObj = new _getUpdateStatus();
+                _setSubscribeEmailObj = Repobj.insertSubscribeEmail(subcribeemailaddress);
+
+                if (_setSubscribeEmailObj.ResponseStatus == true)
+                {
+                    res.ResponseSuccess = true;
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+    }
+}

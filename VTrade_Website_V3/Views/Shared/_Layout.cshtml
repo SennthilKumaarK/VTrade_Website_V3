@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Vtrade Goods wholesalers Co.L.L.C is one of the leading foodservice distributors, exporters and importers of superior quality food and non - food products"
+          name="description">
+    <meta content="Vtrade Goods Wholesalers Co.L.L.C, Vtrade, Vtrade Goods, Vtrade LLC"
+          name="keywords">
+    <title>Vtrade Goods - Leading foodservice distributors, exporters and importers</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="content-language" content="en">
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    @Scripts.Render("~/jsheaderbundles/javasripts")
+    @RenderSection("scripts", required: false)
+
+    @Styles.Render("~/cssbundles/csstyle")
+</head>
+<body>
+
+    @Html.Partial("_Header")
+
+    <main id="main" data-aos="fade-up">
+        @RenderBody()
+    </main>
+
+    @Html.Partial("_Footer")
+
+
+    @*<div id="preloader">
+        </div>*@
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- End Footer -->
+
+
+    @Scripts.Render("~/jsfooterbundles/javasripts")
+    @RenderSection("scripts", required: false)
+
+
+
+
+
+</body>
+</html>

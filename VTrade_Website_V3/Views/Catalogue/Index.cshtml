@@ -1,0 +1,251 @@
+﻿<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs breadcrumbs2 catalogue">
+    <div class="boxedeb">
+        <div class="container page-block-small">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2>
+                    E-Catalogue
+                </h2>
+                <span class="line">
+                </span>
+                <div class="rightText">
+                    <a href="@Url.Action("Index", "Home")" title="Home">Home</a>
+                    / E-Catalogue
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+
+<section class="inner-page" style="padding: 0px 0 !important;">
+    <div class="container">
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container ecatalogueformlayout" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row">
+
+                    <div class="col-lg-12 eCatalogue-form">
+                        <div class="" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member">
+                                <div class="member-img" style="box-shadow: 10px 0px 5px #aaaaaa;">
+                                    Download E-Catalogue
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" style="border: 2px solid #00B7B0;box-shadow: 10px 10px 5px #aaaaaa;">
+
+                    <div class="col-lg-12 php-email-form php-email-form-noborder">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" id="txtContactName" maxlength="100" placeholder="Your Name" />
+                            <label id="lblNameError" class=""></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" id="txtContactEmail" maxlength="100" placeholder="Your Email" />
+                            <label id="lblEmailError" class=""></label>
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownList("ddlCountry", (IEnumerable<SelectListItem>)ViewData["CountryCodeListItems"], new { @class = "dropdown-list-country", @id = "ddlCountry" })
+                            <input type="text" autocomplete="off" class="form-control" id="txtContactNumber" maxlength="15" placeholder="Contact Number" />
+                            <label id="lblNumberError" class=""></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" id="txtContactMessage" maxlength="500" placeholder="Message" />
+                            <label id="lblMessageError" class=""></label>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" id="btnDownloadSubmit" class="buttonSubmit">
+                                Download
+                            </button>
+                        </div>
+                        <div class="text-center" style="padding-left: 10%; padding-top: 10px;">
+                            <label id="lblcataloguemessage" class=""></label>
+                        </div>
+                        <div id="catalogue-loader" class="progressloader" style="display:none;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- End Contact Section -->
+    </div>
+</section>
+
+<div class="modal fade" id="InfoModal" runat="server" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Info Box
+                </h5>
+            </div>
+            <div class="modal-body">
+                <asp:Label runat="server" ID="lblInfo" Text="" Style="font-size: 16px; padding-left: 0px;"></asp:Label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#txtContactName,#txtContactEmail,#txtContactNumber,#txtContactMessage').on('keypress', function (e) {
+        var ingnore_key_codes = [34, 39];
+        if ($.inArray(e.which, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+        }
+    });
+
+    $('#btnDownloadSubmit').click(function () {
+
+        //$("#InfoModal").modal('show');
+        //$("#lblInfo").val("test");
+        //$("#lblInfo").html("test");
+
+        //return true;
+
+        $("#lblNameError").removeClass('invalidtooltipShow');
+        $("#lblEmailError").removeClass('invalidtooltipShow');
+        $("#lblNumberError").removeClass('invalidtooltipShow');
+        $("#lblMessageError").removeClass('invalidtooltipShow');
+
+        $("#lblNameError").addClass('invalidtooltiphide');
+        $("#lblEmailError").addClass('invalidtooltiphide');
+        $("#lblNumberError").addClass('invalidtooltiphide');
+        $("#lblMessageError").addClass('invalidtooltiphide');
+
+        $("#txtContactName").removeClass('invalidborderColour');
+        $("#txtContactEmail").removeClass('invalidborderColour');
+        $("#txtContactNumber").removeClass('invalidborderColour');
+        $("#txtContactMessage").removeClass('invalidborderColour');
+        $("#ddlCountry").removeClass('invalidborderColour');
+
+        if ($.trim($("#txtContactName").val()) == '') {
+
+            $("#lblNameError").removeClass('invalidtooltiphide');
+            $("#lblNameError").addClass('invalidtooltipShow');
+            $("#txtContactName").addClass('invalidborderColour');
+
+            $("#lblNameError").val("Please fill your name.");
+            $("#lblNameError").html("Please fill your name.")
+
+            return false;
+        }
+
+        else if ($.trim($("#txtContactEmail").val()) == '') {
+
+            $("#lblEmailError").removeClass('invalidtooltiphide');
+            $("#lblEmailError").addClass('invalidtooltipShow');
+            $("#txtContactEmail").addClass('invalidborderColour');
+
+            $("#lblEmailError").val("Please fill your email address.");
+            $("#lblEmailError").html("Please fill your email address.")
+
+            return false;
+        }
+
+        else if (!validateSubscribeEmail($("#txtContactEmail").val())) {
+
+            $("#lblEmailError").removeClass('invalidtooltiphide');
+            $("#lblEmailError").addClass('invalidtooltipShow');
+            $("#txtContactEmail").addClass('invalidborderColour');
+
+            $("#lblEmailError").val("Please fill valid email address.");
+            $("#lblEmailError").html("Please fill valid email address.")
+
+            return false;
+        }
+
+        else if ($.trim($("#ddlCountry option:selected").val()).toUpperCase() == '0') {
+
+            $("#lblNumberError").removeClass('invalidtooltiphide');
+            $("#lblNumberError").addClass('invalidtooltipShow');
+            $("#ddlCountry").addClass('invalidborderColour');
+
+            $("#lblNumberError").val("Please select any one of your country code.");
+            $("#lblNumberError").html("Please select any one of your country code.")
+
+            return false;
+        }
+
+        else if ($.trim($("#txtContactNumber").val()) == '') {
+
+            $("#lblNumberError").removeClass('invalidtooltiphide');
+            $("#lblNumberError").addClass('invalidtooltipShow');
+            $("#txtContactNumber").addClass('invalidborderColour');
+
+            $("#lblNumberError").val("Please fill your contact number.");
+            $("#lblNumberError").html("Please fill your contact number.")
+
+            return false;
+        }
+
+        else if ($.trim($("#txtContactMessage").val()) == '') {
+
+            $("#lblMessageError").removeClass('invalidtooltiphide');
+            $("#lblMessageError").addClass('invalidtooltipShow');
+            $("#txtContactMessage").addClass('invalidborderColour');
+
+            $("#lblMessageError").val("Please fill your message.");
+            $("#lblMessageError").html("Please fill your message.")
+
+            return false;
+        }
+
+        $('#catalogue-loader').show();
+
+        var getContactDetailURL = '@Url.Action("InsertContactDetails", "Catalogue")';
+        var contact_email = $('#txtContactEmail').val();
+        var contact_name = $('#txtContactName').val();
+        var contact_number = '(' + $('#ddlCountry').val() + ') ' + $('#txtContactNumber').val();
+        var contact_message = $('#txtContactMessage').val();
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: getContactDetailURL,
+                    data: { "ContactName": contact_name, "ContactEmail": contact_email, "ContactNumber": contact_number, "ContactMessage": contact_message },
+                    success: function (result) {
+                        //console.log(result);
+
+                        setTimeout(function () {
+                            $('#catalogue-loader').hide();
+
+                        if (result.ResponseSuccess == true) {
+
+                            $('#txtContactEmail').val('');
+                            $('#txtContactName').val('');
+                            $('#txtContactNumber').val('');
+                            $('#txtContactMessage').val('');
+                            $('#ddlCountry').val($("#ddlCountry option:contains('Select Country Code')").val());
+
+                            window.location.href = '/Catalogue/DownloadDocument';
+                        }
+                        else {
+
+                            $("#lblcataloguemessage").removeClass();
+                            $("#lblcataloguemessage").addClass('invalidtooltipShow2');
+
+                            $("#lblcataloguemessage").val(result.ResponseMessage);
+                            $("#lblcataloguemessage").html(result.ResponseMessage);
+
+                            }
+
+                        }, 2000);
+                    },
+                });
+
+    });
+
+</script>

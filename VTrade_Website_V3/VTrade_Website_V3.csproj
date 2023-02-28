@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA9551D5-D857-4EDC-9C6F-25966D2BC2F6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VTrade_Website_V3</RootNamespace>
+    <AssemblyName>VTrade_Website_V3</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CatalogueController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResponseData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\img\about.jpg" />
+    <Content Include="assets\img\ajaxloader.gif" />
+    <Content Include="assets\img\align-left.png" />
+    <Content Include="assets\img\banner-img.jpg" />
+    <Content Include="assets\img\banners\about.jpg" />
+    <Content Include="assets\img\banners\brand.jpg" />
+    <Content Include="assets\img\banners\catalogue.jpg" />
+    <Content Include="assets\img\banners\contact.jpg" />
+    <Content Include="assets\img\banners\e-catalogue.jpg" />
+    <Content Include="assets\img\banners\product.jpg" />
+    <Content Include="assets\img\boxedb.png" />
+    <Content Include="assets\img\brand\Barcel.jpg" />
+    <Content Include="assets\img\brand\Cerelac.jpg" />
+    <Content Include="assets\img\brand\CocaCola.jpg" />
+    <Content Include="assets\img\brand\Doritos.jpg" />
+    <Content Include="assets\img\brand\Evian.jpg" />
+    <Content Include="assets\img\brand\Fritolay.jpg" />
+    <Content Include="assets\img\brand\Galderma.jpg" />
+    <Content Include="assets\img\brand\Head_Shoulders.jpg" />
+    <Content Include="assets\img\brand\Heineken.jpg" />
+    <Content Include="assets\img\brand\HormelFoods.jpg" />
+    <Content Include="assets\img\brand\Jm_smucker.jpg" />
+    <Content Include="assets\img\brand\Johnsonjohnson.jpg" />
+    <Content Include="assets\img\brand\Lavazza.jpg" />
+    <Content Include="assets\img\brand\LOreal.jpg" />
+    <Content Include="assets\img\brand\Lotus.jpg" />
+    <Content Include="assets\img\brand\Nescafe.jpg" />
+    <Content Include="assets\img\brand\Nesquik.jpg" />
+    <Content Include="assets\img\brand\Nestle.jpg" />
+    <Content Include="assets\img\brand\Nido.jpg" />
+    <Content Include="assets\img\brand\Nutella.jpg" />
+    <Content Include="assets\img\brand\Ovaltine.jpg" />
+    <Content Include="assets\img\brand\Pringles.jpg" />
+    <Content Include="assets\img\brand\Quaker.jpg" />
+    <Content Include="assets\img\brand\Reckitt-Benckiser.jpg" />
+    <Content Include="assets\img\brand\Revlon.jpg" />
+    <Content Include="assets\img\brand\Starbucks.jpg" />
+    <Content Include="assets\img\brand\Unilever.jpg" />
+    <Content Include="assets\img\brand\Vogue.jpg" />
+    <Content Include="assets\img\category-bg-new.jpg" />
+    <Content Include="assets\img\category-bg.jpg" />
+    <Content Include="assets\img\category\baby-mild-food.png" />
+    <Content Include="assets\img\category\beverage-icon.png" />
+    <Content Include="assets\img\category\Confectionery-icon.png" />
+    <Content Include="assets\img\category\milk-powder-icon.png" />
+    <Content Include="assets\img\category\personal-care.png" />
+    <Content Include="assets\img\category\snacks-icon.png" />
+    <Content Include="assets\img\category\spread-icon.png" />
+    <Content Include="assets\img\category\tea-icon.png" />
+    <Content Include="assets\img\category\toiletries-icon.png" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\loader.gif" />
+    <Content Include="assets\img\loader_small.gif" />
+    <Content Include="assets\img\product-bg.jpg" />
+    <Content Include="assets\img\product\Aveeno_01.jpg" />
+    <Content Include="assets\img\product\cerave_01.jpg" />
+    <Content Include="assets\img\product\Cerelac_Wheat_Honey_400g_01.jpg" />
+    <Content Include="assets\img\product\Cetaphil_01.jpg" />
+    <Content Include="assets\img\product\cheetos_01.jpg" />
+    <Content Include="assets\img\product\Cheetos_Flaming_Hot_Crunchy_8Oz_01.jpg" />
+    <Content Include="assets\img\product\Cheetos_Flaming_Hot_Crunchy_8Oz_02.jpg" />
+    <Content Include="assets\img\product\Cheetos_Flaming_Hot_Crunchy_8Oz_03.jpg" />
+    <Content Include="assets\img\product\Cheetos_Puff_Jumbo9Oz_01.jpg" />
+    <Content Include="assets\img\product\CIF_Antibacterial_01.jpg" />
+    <Content Include="assets\img\product\CIF_Antibacterial_02.jpg" />
+    <Content Include="assets\img\product\CIF_PRO_ALL_PURPOSE_SPRAY_520ml_01.jpg" />
+    <Content Include="assets\img\product\CIF_PRO_ALL_PURPOSE_SPRAY_520ml_02.jpg" />
+    <Content Include="assets\img\product\Coca_Cola_320ml_01.jpg" />
+    <Content Include="assets\img\product\Coca_Cola_320ml_02.jpg" />
+    <Content Include="assets\img\product\Coca_Cola_320ml_03.jpg" />
+    <Content Include="assets\img\product\Coca_Cola_320ml_04.jpg" />
+    <Content Include="assets\img\product\Coca_Cola_320ml_05.jpg" />
+    <Content Include="assets\img\product\Coffeemate_01.jpg" />
+    <Content Include="assets\img\product\Comfort_Fabric_Softener_Pure2L_01.jpg" />
+    <Content Include="assets\img\product\Comfort_Fabric_Softener_Pure2L_02.jpg" />
+    <Content Include="assets\img\product\Comfort_Fabric_Softener_Pure2L_03.jpg" />
+    <Content Include="assets\img\product\Comfort_Fabric_Softener_Pure2L_04.jpg" />
+    <Content Include="assets\img\product\Dettol_125ml_01.jpg" />
+    <Content Include="assets\img\product\Dettol_250ml_01.JPG" />
+    <Content Include="assets\img\product\Dettol_550ml_01.jpg" />
+    <Content Include="assets\img\product\Doritos_01.jpg" />
+    <Content Include="assets\img\product\Evian_330cL_01.jpg" />
+    <Content Include="assets\img\product\Evian_330cL_02.jpg" />
+    <Content Include="assets\img\product\Evian_500ml_01.jpg" />
+    <Content Include="assets\img\product\Evian_500ml_02.jpg" />
+    <Content Include="assets\img\product\Fanta_320ml_01.jpg" />
+    <Content Include="assets\img\product\Fanta_320ml_02.jpg" />
+    <Content Include="assets\img\product\Fanta_320ml_03.jpg" />
+    <Content Include="assets\img\product\Fanta_320ml_04.jpg" />
+    <Content Include="assets\img\product\head_shoulder_01.jpg" />
+    <Content Include="assets\img\product\heineken_01.jpg" />
+    <Content Include="assets\img\product\jif_01.jpg" />
+    <Content Include="assets\img\product\lavazza_250_01.jpg" />
+    <Content Include="assets\img\product\Lifeboy_Lemon_Soap_01.jpg" />
+    <Content Include="assets\img\product\Lifeboy_Total_Soap_01.jpg" />
+    <Content Include="assets\img\product\Lifebuoy_bacterial_01.jpg" />
+    <Content Include="assets\img\product\Lifebuoy_bacterial_02.jpg" />
+    <Content Include="assets\img\product\lotus_spread_01.jpg" />
+    <Content Include="assets\img\product\Lotus_Spread_1_6kg.jpg" />
+    <Content Include="assets\img\product\Lotus_Spread_20g_01.jpg" />
+    <Content Include="assets\img\product\Lotus_Spread_400g.jpg" />
+    <Content Include="assets\img\product\Lotus_Spread_Crunchy_380g.jpg" />
+    <Content Include="assets\img\product\NAN_pro_1_800g_01.jpg" />
+    <Content Include="assets\img\product\NAN_pro_2_800g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_100g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_100g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_47.5g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_47.5g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_50g_Tin_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_50g_Tin_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_95g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Classic_95g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_200g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_200g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_47.5g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_47.5g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_95g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Gold_95g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_Original_230g_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_Original_230g_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_RTD_240ml_Mocha_01.jpg" />
+    <Content Include="assets\img\product\Nescafe_RTD_240ml_Mocha_02.jpg" />
+    <Content Include="assets\img\product\Nescafe_RTD_240ml_Mocha_03.jpg" />
+    <Content Include="assets\img\product\NesquikPowdered_Chocolate_Inst_460g_01.jpg" />
+    <Content Include="assets\img\product\NesquikPowdered_Chocolate_Inst_460g_02.jpg" />
+    <Content Include="assets\img\product\Nesquik_Extra_Choco_390g_01.jpg" />
+    <Content Include="assets\img\product\Nesquik_Extra_Choco_390g_02.jpg" />
+    <Content Include="assets\img\product\Nesquik_Powdered_Tin_800g_01.jpg" />
+    <Content Include="assets\img\product\Nesquik_Powdered_Tin_800g_02.jpg" />
+    <Content Include="assets\img\product\Neutrogena_200ml_01.jpg" />
+    <Content Include="assets\img\product\Nido_Whitecap_1800_01.jpg" />
+    <Content Include="assets\img\product\Nido_Whitecap_2500_01.jpg" />
+    <Content Include="assets\img\product\Nido_Whitecap_400_01.jpg" />
+    <Content Include="assets\img\product\Nido_Whitecap_900_01.jpg" />
+    <Content Include="assets\img\product\Nutella_3kg_01.jpg" />
+    <Content Include="assets\img\product\Nutella_3kg_02.jpg" />
+    <Content Include="assets\img\product\Nutella_750g_01.jpg" />
+    <Content Include="assets\img\product\Nutella_bready_01.jpg" />
+    <Content Include="assets\img\product\ogx_01.jpg" />
+    <Content Include="assets\img\product\ovaltine_01.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_01.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_02.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_03.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_04.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_05.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_06.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_07.jpg" />
+    <Content Include="assets\img\product\Pringles_165g_08.jpg" />
+    <Content Include="assets\img\product\Pringles_40g_01.jpg" />
+    <Content Include="assets\img\product\Pringles_40g_02.jpg" />
+    <Content Include="assets\img\product\Pringles_40g_03.jpg" />
+    <Content Include="assets\img\product\Pringles_40g_04.jpg" />
+    <Content Include="assets\img\product\Quaker_Oats_500g_01.jpg" />
+    <Content Include="assets\img\product\Quaker_Oats_500g_02.jpg" />
+    <Content Include="assets\img\product\Quaker_Oats_500g_03.jpg" />
+    <Content Include="assets\img\product\Revlon_hair_01.jpg" />
+    <Content Include="assets\img\product\Schweppes_Bitter_Lemon_01.jpg" />
+    <Content Include="assets\img\product\Schweppes_Bitter_Lemon_02.jpg" />
+    <Content Include="assets\img\product\Schweppes_Bitter_Lemon_03.jpg" />
+    <Content Include="assets\img\product\Schweppes_Bitter_Lemon_04.jpg" />
+    <Content Include="assets\img\product\skippy_01.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_01.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_02.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_03.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_04.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_05.jpg" />
+    <Content Include="assets\img\product\Starbucks_Doubleshot_06.jpg" />
+    <Content Include="assets\img\product\Starbucks_Refresher_Peach_01.jpg" />
+    <Content Include="assets\img\product\Starbucks_Refresher_Peach_02.jpg" />
+    <Content Include="assets\img\product\Starbucks_Refresher_Peach_03.jpg" />
+    <Content Include="assets\img\product\Suave_01.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_01.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_02.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_03.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_04.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_05.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_06.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_07.jpg" />
+    <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_08.jpg" />
+    <Content Include="assets\img\product\Takis_01.jpg" />
+    <Content Include="assets\img\tmp\about1.jpg" />
+    <Content Include="assets\img\tmp\about2.jpg" />
+    <Content Include="assets\img\tmp\banner-img02.jpg" />
+    <Content Include="assets\img\tmp\banner-img1.jpg" />
+    <Content Include="assets\img\tmp\banner-img10.jpg" />
+    <Content Include="assets\img\tmp\banner-img2.jpg" />
+    <Content Include="assets\img\tmp\banner-img21.jpg" />
+    <Content Include="assets\img\tmp\banner-img3.jpg" />
+    <Content Include="assets\img\tmp\banner-img4.jpg" />
+    <Content Include="assets\img\tmp\banner-img5 %282%29.jpg" />
+    <Content Include="assets\img\tmp\banner-img6.jpg" />
+    <Content Include="assets\img\tmp\banner-img7.jpg" />
+    <Content Include="assets\img\tmp\banner-img8.jpg" />
+    <Content Include="assets\img\tmp\banner-img9.jpg" />
+    <Content Include="assets\img\tmp\Catalogue_compressed_pdf.jpg" />
+    <Content Include="assets\img\tmp\category-bg1.jpg" />
+    <Content Include="assets\img\tmp\category-bg2.jpg" />
+    <Content Include="assets\img\tmp\category-bg3.jpg" />
+    <Content Include="assets\img\tmp\product-bg1.jpg" />
+    <Content Include="assets\img\tmp\product-bg2.jpg" />
+    <Content Include="assets\img\tmp\product-bg9.jpg" />
+    <Content Include="assets\img\tmp\why-vtrade-bg1.jpg" />
+    <Content Include="assets\img\tmp\why-vtrade-bg2.jpg" />
+    <Content Include="assets\img\tmp\why-vtrade-bg5.jpg" />
+    <Content Include="assets\img\tmp\why-vtrade-bg6.jpg" />
+    <Content Include="assets\img\vtradelogo.jpg" />
+    <Content Include="assets\js\jquery-3.6.3.min.js" />
+    <Content Include="assets\js\jquery.flurry.js" />
+    <Content Include="assets\js\jquery.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\vendor\aos\aos.css" />
+    <Content Include="assets\vendor\aos\aos.js" />
+    <Content Include="assets\vendor\bootstrap-icons\bootstrap-icons.css" />
+    <Content Include="assets\vendor\bootstrap-icons\index.html" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\vendor\boxicons\css\animations.css" />
+    <Content Include="assets\vendor\boxicons\css\boxicons.css" />
+    <Content Include="assets\vendor\boxicons\css\boxicons.min.css" />
+    <Content Include="assets\vendor\boxicons\css\transformations.css" />
+    <Content Include="assets\vendor\boxicons\fonts\boxicons.svg" />
+    <Content Include="assets\vendor\glightbox\css\glightbox.css" />
+    <Content Include="assets\vendor\glightbox\css\glightbox.min.css" />
+    <Content Include="assets\vendor\glightbox\css\plyr.css" />
+    <Content Include="assets\vendor\glightbox\css\plyr.min.css" />
+    <Content Include="assets\vendor\glightbox\js\glightbox.js" />
+    <Content Include="assets\vendor\glightbox\js\glightbox.min.js" />
+    <Content Include="assets\vendor\isotope-layout\isotope.pkgd.js" />
+    <Content Include="assets\vendor\isotope-layout\isotope.pkgd.min.js" />
+    <Content Include="assets\vendor\purecounter\purecounter_vanilla.js" />
+    <Content Include="assets\vendor\swiper\swiper-bundle.min.css" />
+    <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
+    <Content Include="assets\vendor\waypoints\noframework.waypoints.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\docx\Vtrade_Goods.pdf" />
+    <Content Include="assets\vendor\bootstrap-icons\bootstrap-icons.json" />
+    <Content Include="assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff" />
+    <Content Include="assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="assets\vendor\boxicons\fonts\boxicons.eot" />
+    <Content Include="assets\vendor\boxicons\fonts\boxicons.ttf" />
+    <Content Include="assets\vendor\boxicons\fonts\boxicons.woff" />
+    <Content Include="assets\vendor\boxicons\fonts\boxicons.woff2" />
+    <Content Include="assets\vendor\swiper\swiper-bundle.min.js.map" />
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Newsletter.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Catalogue\Index.cshtml" />
+    <Content Include="Views\Catalogue\DownloadDocument.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{6f699fec-9b0e-460d-a789-a973e54cabf1}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52590</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52590/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

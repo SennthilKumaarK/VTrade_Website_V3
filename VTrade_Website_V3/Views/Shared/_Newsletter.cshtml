@@ -1,0 +1,117 @@
+﻿<div class="footer-newsletter">
+    <div class="container" id="footernewsletter">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h4>Join Our Newsletter</h4>
+                <p>Subscribe to our newsletter to receive emails about new product releases</p>
+
+                <div class="form-row">
+                    <input type="text" autocomplete="off" class="form-control" id="txtSubscribeEmail" maxlength="100" placeholder="Enter your Email Address" type="email" />
+
+                    <button type="button" id="btnSubscribeSubmit" class="footer-newsletter-button">
+                        Subscribe
+                    </button>
+                    <div id="newsletter-loader" class="progressloader-small" style="display:none;">
+                    </div>
+                </div>
+                <div>
+                    <label for="_lblSubscribeEmailError" id="lblSubscribeEmailError" class=""></label>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    $('#txtSubscribeEmail').on('keypress', function (e) {
+        var ingnore_key_codes = [34, 39];
+        if ($.inArray(e.which, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+        }
+    });
+
+        $('#btnSubscribeSubmit').click(function () {
+
+        $("#lblSubscribeEmailError").removeClass();
+        $("#lblSubscribeEmailError").addClass('invalidtooltiphide');
+
+        $("#txtSubscribeEmail").removeClass('invalidborderColour');
+
+        if ($.trim($("#txtSubscribeEmail").val()) == '') {
+
+
+            $("#lblSubscribeEmailError").removeClass();
+            $("#lblSubscribeEmailError").addClass('invalidtooltipShow2');
+            $("#txtSubscribeEmail").addClass('invalidborderColour');
+
+            $("#lblSubscribeEmailError").val("Please fill your email address.");
+            $("#lblSubscribeEmailError").html("Please fill your email address.");
+
+        }
+
+        else if (!validateSubscribeEmail($("#txtSubscribeEmail").val())) {
+
+            $("#lblSubscribeEmailError").removeClass();
+            $("#lblSubscribeEmailError").addClass('invalidtooltipShow2');
+            $("#txtSubscribeEmail").addClass('invalidborderColour');
+
+            $("#lblSubscribeEmailError").val("Please fill valid email address.");
+            $("#lblSubscribeEmailError").html("Please fill valid email address.");
+
+        }
+
+        else {
+
+            $('#newsletter-loader').show();
+
+            var addSubscribeURL = '@Url.Action("AddSubscribeEmail", "Home")';
+            var subcribe_emailaddress = $('#txtSubscribeEmail').val();
+
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: addSubscribeURL,
+                    data: { "subcribeemailaddress": subcribe_emailaddress },
+                    success: function (result) {
+                        //console.log(result);
+
+                        setTimeout(function () {
+                            $('#newsletter-loader').hide();
+
+                            if (result.ResponseSuccess == true) {
+                                //alert('success');
+                                $('#txtSubscribeEmail').val('');
+
+                                $("#lblSubscribeEmailError").removeClass();
+                                $("#lblSubscribeEmailError").addClass('validtooltipShow2');
+
+                                $("#lblSubscribeEmailError").val("Your email address has been successfully received.");
+                                $("#lblSubscribeEmailError").html("Your email address has been successfully received.");
+                            }
+                            else {
+                                $("#lblSubscribeEmailError").removeClass();
+                                //$("#lblSubscribeEmailError").removeClass('invalidtooltiphide');
+                                $("#lblSubscribeEmailError").addClass('invalidtooltipShow2');
+
+                                $("#lblSubscribeEmailError").val(result.ResponseMessage);
+                                $("#lblSubscribeEmailError").html(result.ResponseMessage);
+                            }
+
+
+                        }, 2000);
+
+
+                    },
+                });
+
+        }
+    });
+</script>
