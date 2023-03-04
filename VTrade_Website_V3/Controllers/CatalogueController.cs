@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VTrade_Website_V3.Models;
+using DAL.Repository;
+using DAL.Models;
 using DAL;
 
 namespace VTrade_Website_V3.Controllers
@@ -15,7 +17,7 @@ namespace VTrade_Website_V3.Controllers
         {
             try
             {
-                Repository Repobj = new Repository();
+                Methods Repobj = new Methods();
                 _getCountryCodes _getCountryCodesObj = new _getCountryCodes();
                 _getCountryCodesObj = Repobj.getCountryCodeList();
 
@@ -64,7 +66,7 @@ namespace VTrade_Website_V3.Controllers
             ResponseData res = new ResponseData();
             try
             {
-                Repository Repobj = new Repository();
+                Methods Repobj = new Methods();
                 _getUpdateStatus _setSubscribeEmailObj = new _getUpdateStatus();
                 _setSubscribeEmailObj = Repobj.insertContactDetails(_ContactDetail);
 

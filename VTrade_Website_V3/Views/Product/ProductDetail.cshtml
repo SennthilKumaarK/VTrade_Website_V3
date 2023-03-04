@@ -1,0 +1,110 @@
+﻿<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs breadcrumbs2 product">
+    <div class="boxedeb">
+        <div class="container page-block-small">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2>
+                    Our Products
+                </h2>
+                <span class="line">
+                </span>
+                <div class="rightText">
+                    <a href="@Url.Action("Index", "Home")" title="Home">Home</a>
+                    / <a href="@Url.Action("Index", "Product")" title="Home">Products</a> /
+                    <label id="lblProductName" class=""></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+<!-- ======= Portfolio Details Section ======= -->
+<section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+        <div class="row gy-4" id="elementTag">
+            <div class="col-lg-8">
+                <div class="portfolio-details-slider swiper">
+                    <div class="swiper-wrapper align-items-center" id="lstProdImgList">
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="portfolio-info" id="lstProdInfo">
+                </div>
+                <div id="portfoliodescription" runat="server" class="portfolio-description">
+                    <h2>Description</h2>
+                    <p>
+                        <label id="lblProdDesc" class=""></label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row gy-4" id="progressTag" style="display: none; height: 180px;">
+            <div id="ProductDetail_loader" class="progressloader-relative">
+            </div>
+        </div>
+    </div>
+</section><!-- End Portfolio Details Section -->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#portfoliodescription').hide();
+
+        $('#progressTag').show();
+        $('#elementTag').hide();
+
+         GetProductDetails();
+
+    });
+
+    function GetProductDetails() {
+
+
+
+        var getProductDetailsURL = '@Url.Action("GetProductInfo", "Product")';
+        var sProductID = '';
+         if ('@ViewData["ProductID"]' != '') {
+             sProductID = '@ViewData["ProductID"]';
+        }
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: getProductDetailsURL,
+                data: { "ProductID": sProductID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //console.log(result);
+
+                    setTimeout(function () {
+
+                        $('#progressTag').hide();
+                        $('#elementTag').show();
+
+                        if (result.ResponseSuccess == true) {
+                            //alert(result.ProductName);
+                            $('#lblProductName').html(result.ProductName);
+                            $('#lstProdImgList').html(result.ProductImageList);
+                            $('#lstProdInfo').html(result.ProductInformation);
+
+                            if (result.ProductDesc.length != 0) {
+                                $('#portfoliodescription').show();
+                                $('#lblProdDesc').html(result.ProductDesc);
+                            }
+                        }
+                        else {
+                            //alert(result.ResponseMessage);
+                        }
+
+
+                    }, 2000);
+
+                },
+            });
+    }
+
+</script>

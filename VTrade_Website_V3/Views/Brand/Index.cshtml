@@ -1,0 +1,125 @@
+﻿<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs breadcrumbs2 brand">
+    <div class="boxedeb">
+        <div class="container page-block-small">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2>
+                    Our Brands
+                </h2>
+                <span class="line">
+                </span>
+                <div class="rightText">
+                    <a href="@Url.Action("Index", "Home")" title="Home">Home</a>
+                    / Our Brands
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+<section class="inner-page" style="padding: 0px 0 !important;">
+    <div class="container">
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="Brand">
+            <div class="container" data-aos="fade-up">
+                <div class="col-lg-12  col-sm-12 col-xs-12" style="text-align: left; padding-left: 20px; padding-top: 65px; padding-bottom: 65px;">
+                    <label id="lblPageNO" style="visibility:hidden;"></label>
+                    <label id="lblTopPagination" class="lblPagination"></label>&nbsp;&nbsp;
+                    <button type="button" id="btnPreviousTop" class="buttonSubmit">
+                        < &nbsp;&nbsp; Previous
+                    </button>
+                    <button type="button" id="btnNextTop" class="buttonSubmit">
+                        Next &nbsp;&nbsp;>
+                    </button>
+                </div>
+                <div class="row" data-aos="fade-up" data-aos-delay="200" id="lstBrandItems">
+                </div>
+                <div id="brand_loader" class="progressloader" style="display:none;">
+                </div>
+            </div>
+        </section>
+        <!-- End Portfolio Section -->
+    </div>
+</section>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#btnPreviousTop').hide();
+        $('#btnNextTop').hide();
+        GetBrandItems(1);
+    });
+
+    $(function () {
+        $('#btnNextTop').click(function () {
+            var _lblPageNO = $('#lblPageNO').text();
+            if (_lblPageNO != '') {
+                GetBrandItems(parseInt(_lblPageNO) + parseInt(1));
+            }
+        });
+
+        $('#btnPreviousTop').click(function () {
+            var _lblPageNO = $('#lblPageNO').text();
+            if (_lblPageNO != '') {
+                GetBrandItems(parseInt(_lblPageNO) - parseInt(1));
+            }
+        });
+    });
+
+    function GetBrandItems(Page_NO) {
+
+        $('#brand_loader').show();
+        $('#lstBrandItems').hide();
+
+        var getBrandItemsURL = '@Url.Action("GetBrandItems", "Brand")';
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: getBrandItemsURL,
+                data: { "PageNO": Page_NO },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //console.log(result);
+
+                    setTimeout(function () {
+                        $('#brand_loader').hide();
+                        $('#lstBrandItems').show();
+
+                        if (result.ResponseSuccess == true) {
+
+                            $('#btnPreviousTop').hide();
+                            $('#btnNextTop').hide();
+
+                            $('#lblPageNO').html(result.PageNO);
+                            $('#lblTopPagination').html(result.ResponseMessage2);
+
+                            $('#lstBrandItems').html(result.ResponseMessage);
+
+                            if (result.PageNO != '') {
+                                var PageNO = result.PageNO;
+                                if (PageNO > 1) {
+                                    $('#btnPreviousTop').show();
+                                }
+                            }
+
+                            if ((result.PageNO != '') && (result.NumSize != '')) {
+                                var PageNO = result.PageNO;
+                                var NumSize = result.NumSize;
+                                if ((PageNO > 0) && (PageNO < NumSize)) {
+                                    $('#btnNextTop').show();
+                                }
+                            }
+
+                        }
+                        else {
+                            //alert(result.ResponseMessage);
+                        }
+                    }, 2000);
+
+
+                },
+            });
+    }
+</script>

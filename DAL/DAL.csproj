@@ -40,6 +40,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,7 +58,8 @@
     <Compile Include="ContactDetail.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CountryCodes.cs" />
+    <Compile Include="Models\CountryCodes.cs" />
+    <Compile Include="Models\ProductFilter.cs" />
     <Compile Include="ProductImageList.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>
@@ -67,9 +69,9 @@
     <Compile Include="ProductItem.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductListInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Models\ProductListInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Methods.cs" />
     <Compile Include="SubscribeDetail.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>
@@ -94,11 +96,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VtradellcdbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="XMLReader.cs" />
-    <Compile Include="_getCategoryItems.cs" />
-    <Compile Include="_getProductItems.cs" />
-    <Compile Include="_getCountryCodes.cs" />
-    <Compile Include="_getUpdateStatus.cs" />
+    <Compile Include="Repository\XMLReader.cs" />
+    <Compile Include="Models\_getBrandItems.cs" />
+    <Compile Include="Models\_getBrandListItems.cs" />
+    <Compile Include="Models\_getCategoryItems.cs" />
+    <Compile Include="Models\_getProductImageList.cs" />
+    <Compile Include="Models\_getProductInfo.cs" />
+    <Compile Include="Models\_getProductItems.cs" />
+    <Compile Include="Models\_getCountryCodes.cs" />
+    <Compile Include="Models\_getProductListItems.cs" />
+    <Compile Include="Models\_getUpdateStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="VtradellcdbModel.edmx">
@@ -128,8 +135,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XML_Path\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

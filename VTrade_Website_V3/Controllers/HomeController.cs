@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VTrade_Website_V3.Models;
+using DAL.Repository;
+using DAL.Models;
 using DAL;
 
 namespace VTrade_Website_V3.Controllers
@@ -22,7 +24,7 @@ namespace VTrade_Website_V3.Controllers
 
             try
             {
-                Repository Repobj = new Repository();
+                Methods Repobj = new Methods();
                 _getCategoryItems _getCategoryItemsObj = new _getCategoryItems();
                 _getCategoryItemsObj = Repobj.getCategoryItems();
 
@@ -69,9 +71,18 @@ namespace VTrade_Website_V3.Controllers
             ResponseData res = new ResponseData();
             try
             {
-                Repository Repobj = new Repository();
+                Methods Repobj = new Methods();
                 _getProductItems _getProductItemsObj = new _getProductItems();
-                _getProductItemsObj = Repobj.getProductItems();
+
+                var ProdID_List = new int[6];
+                ProdID_List[0] = 3;
+                ProdID_List[1] = 12;
+                ProdID_List[2] = 15;
+                ProdID_List[3] = 19;
+                ProdID_List[4] = 39;
+                ProdID_List[5] = 46;
+
+                _getProductItemsObj = Repobj.getProductItemsbyID(ProdID_List);
 
                 if (_getProductItemsObj.ResponseStatus == true)
                 {
@@ -116,7 +127,7 @@ namespace VTrade_Website_V3.Controllers
             ResponseData res = new ResponseData();
             try
             {
-                Repository Repobj = new Repository();
+                Methods Repobj = new Methods();
                 _getUpdateStatus _setSubscribeEmailObj = new _getUpdateStatus();
                 _setSubscribeEmailObj = Repobj.insertSubscribeEmail(subcribeemailaddress);
 

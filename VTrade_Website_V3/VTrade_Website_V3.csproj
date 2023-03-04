@@ -121,16 +121,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CatalogueController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdditionalListResponseData.cs" />
+    <Compile Include="Models\ProductInfoResponseData.cs" />
     <Compile Include="Models\ResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CountryCodes.xml" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\ajaxloader.gif" />
@@ -312,31 +317,6 @@
     <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_07.jpg" />
     <Content Include="assets\img\product\Sunsilk_Shampoo_320ml_08.jpg" />
     <Content Include="assets\img\product\Takis_01.jpg" />
-    <Content Include="assets\img\tmp\about1.jpg" />
-    <Content Include="assets\img\tmp\about2.jpg" />
-    <Content Include="assets\img\tmp\banner-img02.jpg" />
-    <Content Include="assets\img\tmp\banner-img1.jpg" />
-    <Content Include="assets\img\tmp\banner-img10.jpg" />
-    <Content Include="assets\img\tmp\banner-img2.jpg" />
-    <Content Include="assets\img\tmp\banner-img21.jpg" />
-    <Content Include="assets\img\tmp\banner-img3.jpg" />
-    <Content Include="assets\img\tmp\banner-img4.jpg" />
-    <Content Include="assets\img\tmp\banner-img5 %282%29.jpg" />
-    <Content Include="assets\img\tmp\banner-img6.jpg" />
-    <Content Include="assets\img\tmp\banner-img7.jpg" />
-    <Content Include="assets\img\tmp\banner-img8.jpg" />
-    <Content Include="assets\img\tmp\banner-img9.jpg" />
-    <Content Include="assets\img\tmp\Catalogue_compressed_pdf.jpg" />
-    <Content Include="assets\img\tmp\category-bg1.jpg" />
-    <Content Include="assets\img\tmp\category-bg2.jpg" />
-    <Content Include="assets\img\tmp\category-bg3.jpg" />
-    <Content Include="assets\img\tmp\product-bg1.jpg" />
-    <Content Include="assets\img\tmp\product-bg2.jpg" />
-    <Content Include="assets\img\tmp\product-bg9.jpg" />
-    <Content Include="assets\img\tmp\why-vtrade-bg1.jpg" />
-    <Content Include="assets\img\tmp\why-vtrade-bg2.jpg" />
-    <Content Include="assets\img\tmp\why-vtrade-bg5.jpg" />
-    <Content Include="assets\img\tmp\why-vtrade-bg6.jpg" />
     <Content Include="assets\img\vtradelogo.jpg" />
     <Content Include="assets\js\jquery-3.6.3.min.js" />
     <Content Include="assets\js\jquery.flurry.js" />
@@ -401,9 +381,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="assets\docx\Vtrade_Goods.pdf" />
     <Content Include="assets\vendor\bootstrap-icons\bootstrap-icons.json" />
@@ -444,6 +422,9 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Catalogue\Index.cshtml" />
     <Content Include="Views\Catalogue\DownloadDocument.cshtml" />
+    <Content Include="Views\Brand\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

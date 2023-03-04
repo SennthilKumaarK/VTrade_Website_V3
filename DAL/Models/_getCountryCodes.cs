@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DAL.Models
 {
-    public class _getCategoryItems
+    public class _getCountryCodes
     {
         public Boolean ResponseStatus { get; set; }
         public string ErrorMessage { get; set; }
-        public List<CategoryItem> lstCategoryItem { get; set; }
+        public List<CountryCodes> lstCountryCodes { get; set; }
+       
     }
 }

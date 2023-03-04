@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DAL
+namespace DAL.Models
 {
     [Serializable]
     [XmlRoot("CountryCodes"), XmlType("CountryCodes")]
