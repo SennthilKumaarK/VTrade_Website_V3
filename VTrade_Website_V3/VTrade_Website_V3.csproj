@@ -134,6 +134,7 @@
     <Compile Include="Models\AdditionalListResponseData.cs" />
     <Compile Include="Models\ChkUserResponseData.cs" />
     <Compile Include="Models\ProductInfoResponseData.cs" />
+    <Compile Include="Models\ResponseChartData.cs" />
     <Compile Include="Models\ResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,6 +152,10 @@
     <Content Include="admin_assets\img\undraw_profile_3.svg" />
     <Content Include="admin_assets\img\undraw_rocket.svg" />
     <Content Include="admin_assets\img\user-profile.jfif" />
+    <Content Include="admin_assets\js\demo\chart-area-demo.js" />
+    <Content Include="admin_assets\js\demo\chart-bar-demo.js" />
+    <Content Include="admin_assets\js\demo\chart-pie-demo.js" />
+    <Content Include="admin_assets\js\demo\datatables-demo.js" />
     <Content Include="admin_assets\js\sb-admin-2.js" />
     <Content Include="admin_assets\js\sb-admin-2.min.js" />
     <Content Include="admin_assets\vendor\bootstrap\js\bootstrap.bundle.js" />

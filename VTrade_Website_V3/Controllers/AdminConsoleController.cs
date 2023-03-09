@@ -23,7 +23,92 @@ namespace VTrade_Website_V3.Controllers
         [UserSessionAttribute]
         public ActionResult Dashboard()
         {
+            LoadDDLYear();
+            LoadDashboardCount();
             return View();
+        }
+
+        private void LoadDDLYear()
+        {
+            try
+            {
+                Methods Repobj = new Methods();
+                _getUniqueYearVisitorAnalytics _getUniqueYearVisitorAnalyticsObj = new _getUniqueYearVisitorAnalytics();
+                _getUniqueYearVisitorAnalyticsObj = Repobj.getUniqueVisitorAnalyticsYear();
+
+                var YearList = new List<SelectListItem>();
+
+                if (_getUniqueYearVisitorAnalyticsObj.ResponseStatus == true)
+                {
+                    List<string> lstObj = new List<string>();
+                    lstObj = _getUniqueYearVisitorAnalyticsObj.lstYear;
+                    string sCurrentYear = DateTime.Now.ToString("yyyy");
+
+                    if (lstObj != null)
+                    {
+                        foreach (string varYear in lstObj)
+                        {
+                            if (sCurrentYear == varYear)
+                            {
+                                YearList.Add(new SelectListItem
+                                {
+                                    Selected = true,
+                                    Value = varYear,
+                                    Text = varYear
+                                }); ;
+                            }
+                            else
+                            {
+                                YearList.Add(new SelectListItem
+                                {
+                                    Value = varYear,
+                                    Text = varYear
+                                });
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                ViewData["VstAnltYrListItems"] = YearList;
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void LoadDashboardCount()
+        {
+            try
+            {
+                Methods Repobj = new Methods();
+                _getDashboardCount _getDashboardCountObj = new _getDashboardCount();
+                _getDashboardCountObj = Repobj.getDashboardCount();
+
+                if (_getDashboardCountObj.ResponseStatus == true)
+                {
+                    ViewData["TotalVisitorCount"] = _getDashboardCountObj.TotalVisitorCount;
+                    ViewData["TotalVisitorToday"] = _getDashboardCountObj.TotalVisitorToday;
+                    ViewData["TotalProducts"] = _getDashboardCountObj.TotalProducts;
+                    ViewData["TotalContact"] = _getDashboardCountObj.TotalContact;
+                    ViewData["TotalSubscribe"] = _getDashboardCountObj.TotalSubscribe;
+                }
+                else
+                {
+                    ViewData["TotalVisitorCount"] = "0";
+                    ViewData["TotalVisitorToday"] = "0";
+                    ViewData["TotalProducts"] = "0";
+                    ViewData["TotalContact"] = "0";
+                    ViewData["TotalSubscribe"] = "0";
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         [HttpGet]
@@ -57,6 +142,37 @@ namespace VTrade_Website_V3.Controllers
                 }
             }
             catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public JsonResult getChartData(string YearVal)
+        {
+            ResponseChartData res = new ResponseChartData();
+            try
+            {
+                Methods Repobj = new Methods();
+                _getDashboardChartData _getDashboardChartDataObj = new _getDashboardChartData();
+                _getDashboardChartDataObj = Repobj.getDashboardChartData(YearVal);
+
+                if (_getDashboardChartDataObj.ResponseStatus == true)
+                {
+                    res.ResponseSuccess = true;
+                    res.ResponseData = _getDashboardChartDataObj.lstcountval;
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+            }
+            catch (Exception)
             {
                 res.ResponseSuccess = false;
                 res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";

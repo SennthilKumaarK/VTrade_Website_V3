@@ -17,8 +17,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Visitors
                             </div>
-                            <asp:Label ID="lblTotalVisitorCount" runat="server" CssClass="h5 mb-0 font-weight-bold text-gray-800"
-                                       Text=""></asp:Label>
+                            @Html.Label(ViewData["TotalVisitorCount"].ToString(), new { @class = "h5 mb-0 font-weight-bold text-gray-800", @id = "lblTotalVisitorCount" })
                         </div>
                     </div>
                 </div>
@@ -33,8 +32,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total Visitors (today)
                             </div>
-                            <asp:Label ID="lblTotalVisitorToday" runat="server" CssClass="h5 mb-0 font-weight-bold text-gray-800"
-                                       Text=""></asp:Label>
+                            @Html.Label(ViewData["TotalVisitorToday"].ToString(), new { @class = "h5 mb-0 font-weight-bold text-gray-800", @id = "lblTotalVisitorToday" })
                         </div>
                     </div>
                 </div>
@@ -49,8 +47,7 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Total Products
                             </div>
-                            <asp:Label ID="lblTotalProducts" runat="server" CssClass="h5 mb-0 font-weight-bold text-gray-800"
-                                       Text=""></asp:Label>
+                            @Html.Label(ViewData["TotalProducts"].ToString(), new { @class = "h5 mb-0 font-weight-bold text-gray-800", @id = "lblTotalProducts" })
                         </div>
                     </div>
                 </div>
@@ -65,12 +62,9 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Total Subscribers/ Contact Users
                             </div>
-                            <asp:Label ID="lblTotalSubscribe" runat="server" CssClass="h5 mb-0 font-weight-bold text-gray-800"
-                                       Text=""></asp:Label>
+                            @Html.Label(ViewData["TotalSubscribe"].ToString(), new { @class = "h5 mb-0 font-weight-bold text-gray-800", @id = "lblTotalSubscribe" })
                             /
-
-                            <asp:Label ID="lblTotalContact" runat="server" CssClass="h5 mb-0 font-weight-bold text-gray-800"
-                                       Text=""></asp:Label>
+                            @Html.Label(ViewData["TotalContact"].ToString(), new { @class = "h5 mb-0 font-weight-bold text-gray-800", @id = "lblTotalContact" })
                         </div>
                     </div>
                 </div>
@@ -87,8 +81,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">
                         Visitors Count (Monthly)
                     </h6>
-                    <asp:DropDownList ID="ddlYear" runat="server" onchange="LoadChart()" CssClass="dropdown-list">
-                    </asp:DropDownList>
+                    @Html.DropDownList("ddlYear", (IEnumerable<SelectListItem>)ViewData["VstAnltYrListItems"], new { @class = "dropdown-list", @id = "ddlYear", @onchange = "LoadChart()" })
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -111,16 +104,17 @@
     function LoadChart() {
 
         var ddlYearSel = $("#ddlYear").val();
+        var getChartDataURL = '@Url.Action("getChartData", "AdminConsole")';
 
         $.ajax({
-            type: "POST",
-            url: "index.aspx/getChartData",
-            data: JSON.stringify({ 'ddlYearSelVal': ddlYearSel }),
+            type: "GET",
+            url: getChartDataURL,
+            data: { "YearVal": ddlYearSel },
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-                var aData = msg.d;
-                //console.log(aData);
+                var aData = msg.ResponseData;
+                //console.log(msg);
                 // Area Chart Example
                 var ctx = document.getElementById("myAreaChart");
                 var myLineChart = new Chart(ctx, {

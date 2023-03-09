@@ -463,6 +463,139 @@ namespace DAL.Repository
         }
 
 
+        public _getUniqueYearVisitorAnalytics getUniqueVisitorAnalyticsYear()
+        {
+            _getUniqueYearVisitorAnalytics _getUniqueYearVisitorAnalyticsObj = new _getUniqueYearVisitorAnalytics();
+
+            try
+            {
+                List<string> lstYear = new List<string>();
+
+                var result = (from vstAnalytic in entityobj.VisitorAnalytics
+                              select new
+                              {
+                                  vstAnalytic.ANTRYEAR
+                              }).GroupBy(r => r.ANTRYEAR).Select(g => g.FirstOrDefault()).ToList();
+
+                foreach (var element in result)
+                {
+                    lstYear.Add(element.ANTRYEAR);
+                }
+
+                _getUniqueYearVisitorAnalyticsObj.ResponseStatus = true;
+                _getUniqueYearVisitorAnalyticsObj.lstYear = lstYear;
+
+            }
+            catch (Exception ex)
+            {
+                _getUniqueYearVisitorAnalyticsObj.ResponseStatus = false;
+                _getUniqueYearVisitorAnalyticsObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getUniqueYearVisitorAnalyticsObj;
+        }
+
+
+        public _getDashboardCount getDashboardCount()
+        {
+            _getDashboardCount _getDashboardCountObj = new _getDashboardCount();
+
+            try
+            {
+                var VisitorsCount = (from _VisitorAnalytic in entityobj.VisitorAnalytics
+                                     select new
+                                     {
+                                         _VisitorAnalytic.ID
+                                     }
+                                   ).ToList();
+                _getDashboardCountObj.TotalVisitorCount = VisitorsCount.Count().ToString();
+
+                string sCurrentDate = DateTime.Now.ToString("yyyyMMdd");
+                var VisitorsCountToday = (from _VisitorAnalytic in entityobj.VisitorAnalytics
+                                          where (_VisitorAnalytic.ANTRDATE == sCurrentDate)
+                                          select new
+                                          {
+                                              _VisitorAnalytic.ID
+                                          }
+                                   ).ToList();
+                _getDashboardCountObj.TotalVisitorToday = VisitorsCountToday.Count().ToString();
+
+
+                var ProductsCount = (from _ProductItem in entityobj.ProductItems
+                                     where (_ProductItem.Status != "D")
+                                     select new
+                                     {
+                                         _ProductItem.ID
+                                     }
+                                   ).ToList();
+                _getDashboardCountObj.TotalProducts = ProductsCount.Count().ToString();
+
+
+                var SubscribeCount = (from _SubscribeDetail in entityobj.SubscribeDetails
+                                      select new
+                                      {
+                                          _SubscribeDetail.ID
+                                      }
+                                   ).ToList();
+                _getDashboardCountObj.TotalSubscribe = SubscribeCount.Count().ToString();
+
+
+                var ContactCount = (from _ContactDetail in entityobj.ContactDetails
+                                    select new
+                                    {
+                                        _ContactDetail.ID
+                                    }
+                                    ).ToList();
+                _getDashboardCountObj.TotalContact = ContactCount.Count().ToString();
+
+                _getDashboardCountObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getDashboardCountObj.ResponseStatus = false;
+                _getDashboardCountObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getDashboardCountObj;
+        }
+
+        public _getDashboardChartData getDashboardChartData(string YearVal)
+        {
+            _getDashboardChartData _getDashboardChartDataObj = new _getDashboardChartData();
+
+            try
+            {
+                List<string> countval = new List<string>();
+
+                for (int iMonth = 1; iMonth <= 12; iMonth++)
+                {
+                    string sMonth = iMonth.ToString("00");
+                    var VisitorsCount = (from _VisitorAnalytic in entityobj.VisitorAnalytics
+                                         where (_VisitorAnalytic.ANTRYEAR == YearVal) & (_VisitorAnalytic.ANTRMONTH == sMonth)
+                                         select new
+                                         {
+                                             _VisitorAnalytic.ID
+                                         }
+                                   ).ToList();
+
+                    countval.Add(VisitorsCount.Count().ToString());
+                }
+
+                _getDashboardChartDataObj.lstcountval = countval;
+                _getDashboardChartDataObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getDashboardChartDataObj.ResponseStatus = false;
+                _getDashboardChartDataObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getDashboardChartDataObj;
+        }
+
+
         public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)
         {
 
@@ -492,7 +625,7 @@ namespace DAL.Repository
                     _chkLoginStatusObj.UserName = "";
                 }
 
-                
+
             }
             catch (Exception ex)
             {
