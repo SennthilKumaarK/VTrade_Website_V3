@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vtrade Goods - Admin Console</title>
+    <link href="~/admin_assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/admin_assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/admin_assets/img/favicon.png" rel="icon">
+
+
+</head>
+<body class="bg-gradient-primary">
+
+
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+
+                        <!-- Nested Row within Card Body -->
+                        <div class="row" style="padding: 50px;">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">
+                                            Welcome Admin!
+                                        </h1>
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="lblErrorMessage" class="" style="color:Red;"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" autocomplete="off" class="form-control form-control-user" id="txtUsername" maxlength="15" placeholder="Enter Username" autofocus />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" autocomplete="off" class="form-control form-control-user" id="txtPassword" maxlength="15" placeholder="Password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" id="btnSubmit" class="btn btn-primary btn-user btn-block" onclick="return btnLoginSubmitClick()">
+                                            Submit
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/admin_assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/admin_assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/admin_assets/js/sb-admin-2.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('#txtUsername,#txtPassword').on('keypress', function (e) {
+            var ingnore_key_codes = [34, 39];
+            if ($.inArray(e.which, ingnore_key_codes) >= 0) {
+                e.preventDefault();
+            }
+        });
+
+        function btnLoginSubmitClick() {
+
+            $("#lblErrorMessage").val("");
+            $("#lblErrorMessage").html("")
+
+            if ($.trim($("#txtUsername").val()) == '') {
+
+                $("#lblErrorMessage").val("Please fill out the username.");
+                $("#lblErrorMessage").html("Please fill out the username.")
+
+                return false;
+            }
+
+            else if ($.trim($("#txtPassword").val()) == '') {
+
+                $("#lblErrorMessage").val("Please fill out the password.");
+                $("#lblErrorMessage").html("Please fill out the password.")
+
+                return false;
+            }
+
+
+
+            var CheckLoginStatus = '@Url.Action("CheckLoginStatus", "AdminConsole")';
+            var User_Name = $('#txtUsername').val();
+            var User_Password = $('#txtPassword').val();
+
+            $.ajax(
+                {
+                    type: 'GET',
+                    url: CheckLoginStatus,
+                    data: { "User_Name": User_Name, "User_Password": User_Password },
+                    success: function (result) {
+                        //console.log(result);
+
+                            if (result.ResponseSuccess == true) {
+                                window.location.href = '/AdminConsole/Dashboard';
+                            }
+                            else {
+
+                                $("#lblErrorMessage").val(result.ResponseMessage);
+                                $("#lblErrorMessage").html(result.ResponseMessage);
+                            }
+                    },
+                });
+
+
+        }
+
+    </script>
+
+</body>
+</html>

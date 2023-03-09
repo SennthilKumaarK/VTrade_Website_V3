@@ -1,3 +1,22 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    string CurrentControllerName = Convert.ToString(HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"]);
+    switch (CurrentControllerName.ToUpper())
+    {
+        case "ADMINCONSOLE":
+
+            string CurrentActionName = Convert.ToString(HttpContext.Current.Request.RequestContext.RouteData.Values["Action"]);
+            switch (CurrentActionName.ToUpper())
+            {
+                case "INDEX":
+                    break;
+                default:
+                    Layout = "~/Views/Shared/_LayoutAdminConsole.cshtml";
+                    break;
+            }
+
+            break;
+        default:
+            Layout = "~/Views/Shared/_Layout.cshtml";
+            break;
+    }
 }

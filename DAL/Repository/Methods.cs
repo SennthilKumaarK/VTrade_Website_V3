@@ -461,5 +461,49 @@ namespace DAL.Repository
 
             return _getCountryCodesObj;
         }
+
+
+        public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)
+        {
+
+            _chkLoginStatus _chkLoginStatusObj = new _chkLoginStatus();
+            try
+            {
+                var result = (from userDet in entityobj.UserDetails
+                              where (userDet.USERNAME.ToUpper() == User_Name.ToUpper()) && (userDet.USERPASSWORD == User_Password)
+                              select new
+                              {
+                                  userDet.ID,
+                                  userDet.USERNAME,
+                                  userDet.USERPASSWORD,
+                              }).FirstOrDefault();
+
+                if (result != null)
+                {
+                    _chkLoginStatusObj.ResponseStatus = true;
+                    _chkLoginStatusObj.IsUserExist = true;
+                    _chkLoginStatusObj.UserName = result.USERNAME;
+                }
+                else
+                {
+                    _chkLoginStatusObj.ResponseStatus = true;
+                    _chkLoginStatusObj.IsUserExist = false;
+                    _chkLoginStatusObj.UserMessage = "Invalid Username or Password";
+                    _chkLoginStatusObj.UserName = "";
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                _chkLoginStatusObj.ResponseStatus = false;
+                _chkLoginStatusObj.ErrorMessage = ex.Message.ToString();
+            }
+
+
+            return _chkLoginStatusObj;
+        }
+
+
     }
 }

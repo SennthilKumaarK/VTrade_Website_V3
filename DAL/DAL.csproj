@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Models\CountryCodes.cs" />
     <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\_chkLoginStatus.cs" />
     <Compile Include="ProductImageList.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>

@@ -1,0 +1,94 @@
+﻿.dropdown-list
+{
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 5px;
+    font-weight: 400;
+    border-radius: 4px;
+    transition: 0.4s;
+    width: 70px;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+    border: none;
+}
+
+.dropdown-list-product
+{
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 5px;
+    font-weight: 400;
+    border-radius: 4px;
+    transition: 0.4s;
+    width: 300px;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+    border: none;
+}
+
+.ProdInfo-element
+{
+    height:600px;
+    overflow-y:scroll;
+    }
+
+.box1 span, .box2 span, .box3 span, .box4 span, .box5 span, .box6 span, .box7 span, .box8 span, .box9 span, .box10 span, .box11 span, .box12 span
+{
+    color: aliceblue;
+}
+
+.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9, .box10, .box11, .box12
+{
+    border-radius: 5px;
+    padding: 5px;
+}
+.box1
+{
+    background-color: #DB6F5C;
+}
+.box2
+{
+    background-color: #8A83D7;
+}
+.box3
+{
+    background-color: #83D7D0;
+}
+.box4
+{
+    background-color: #D7C983;
+}
+.box5
+{
+    background-color: #4CCDA6;
+}
+.box6
+{
+    background-color: #DB83AF;
+}
+.box7
+{
+    background-color: #77777F;
+}
+.box8
+{
+    background-color: #E6E47F;
+}
+.box9
+{
+    background-color: #5795C9;
+}
+.box10
+{
+    background-color: #57C97D;
+}
+.box11
+{
+    background-color: #B4BCAF;
+}
+.box12
+{
+    background-color: #C9A357;
+}
