@@ -430,6 +430,41 @@ namespace DAL.Repository
             return _getUpdateStatusObj;
         }
 
+        public _getUpdatePassword UpdatePassword(string UserName, string Current_Password, string New_Password)
+        {
+            _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+            try
+            {
+
+                UserDetail result = (from userDet in entityobj.UserDetails
+                                     where (userDet.USERNAME.ToUpper() == UserName.ToUpper()) && (userDet.USERPASSWORD == Current_Password)
+                                     select userDet).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.USERPASSWORD = New_Password;
+                    entityobj.SaveChanges();
+
+                    _getUpdatePasswordObj.IsUpdated = true;
+                    _getUpdatePasswordObj.ErrorMessage = "";
+                }
+                else
+                {
+                    _getUpdatePasswordObj.IsUpdated = false;
+                    _getUpdatePasswordObj.ErrorMessage = "Your Current Password is invalid";
+                }
+
+                _getUpdatePasswordObj.ResponseStatus = true;
+            }
+            catch (Exception ex)
+            {
+                _getUpdatePasswordObj.ResponseStatus = false;
+                _getUpdatePasswordObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getUpdatePasswordObj;
+        }
+
         public _getCountryCodes getCountryCodeList()
         {
             _getCountryCodes _getCountryCodesObj = new _getCountryCodes();

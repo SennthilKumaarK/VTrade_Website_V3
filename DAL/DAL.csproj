@@ -64,6 +64,7 @@
     <Compile Include="Models\_getDashboardChartData.cs" />
     <Compile Include="Models\_getDashboardCount.cs" />
     <Compile Include="Models\_getUniqueYearVisitorAnalytics.cs" />
+    <Compile Include="Models\_getUpdatePassword.cs" />
     <Compile Include="ProductImageList.cs">
       <DependentUpon>VtradellcdbModel.tt</DependentUpon>
     </Compile>

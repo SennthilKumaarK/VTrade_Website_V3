@@ -28,6 +28,12 @@ namespace VTrade_Website_V3.Controllers
             return View();
         }
 
+        [UserSessionAttribute]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
         private void LoadDDLYear()
         {
             try
@@ -182,5 +188,46 @@ namespace VTrade_Website_V3.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult UpdatePassword(string Current_Password, string New_Password)
+        {
+            ChkUserResponseData res = new ChkUserResponseData();
+            try
+            {
+
+                Methods Repobj = new Methods();
+                _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+
+                string User_Name = HttpContext.Session["USERNAME"].ToString();
+                _getUpdatePasswordObj = Repobj.UpdatePassword(User_Name, Current_Password, New_Password);
+
+                if (_getUpdatePasswordObj.ResponseStatus == true)
+                {
+                    if (_getUpdatePasswordObj.IsUpdated == true)
+                    {
+                        res.ResponseSuccess = true;
+                        res.ResponseMessage = "Your Password has been updated";
+                    }
+                    else
+                    {
+                        res.ResponseSuccess = false;
+                        res.ResponseMessage = _getUpdatePasswordObj.ErrorMessage;
+                    }
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

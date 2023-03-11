@@ -2269,6 +2269,7 @@
     <Content Include="Views\AdminConsole\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdminConsole.cshtml" />
     <Content Include="Views\AdminConsole\Dashboard.cshtml" />
+    <Content Include="Views\AdminConsole\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

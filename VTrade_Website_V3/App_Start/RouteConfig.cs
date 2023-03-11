@@ -18,6 +18,14 @@ namespace VTrade_Website_V3
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+            name: "AdminConsole",
+            url: "AdminConsole/{action}/{id}",
+            defaults: new { controller = "AdminConsole", action = "Index", id = UrlParameter.Optional }
+            );
+
+
         }
     }
 }
