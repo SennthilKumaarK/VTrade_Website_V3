@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using DAL.Repository;
 using DAL.Models;
@@ -30,6 +29,12 @@ namespace VTrade_Website_V3.Controllers
 
         [UserSessionAttribute]
         public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [UserSessionAttribute]
+        public ActionResult Visitors()
         {
             return View();
         }
@@ -228,6 +233,23 @@ namespace VTrade_Website_V3.Controllers
 
             return Json(res, JsonRequestBehavior.AllowGet);
 
+        }
+        public ActionResult GetVisitorInfo(string txtDate)
+        {
+            Methods Repobj = new Methods();
+            _getVisitorInfo _getVisitorInfoObj = new _getVisitorInfo();
+            _getVisitorInfoObj = Repobj.GetVisitorInfo(txtDate);
+            List<VisitorAnalytic> lstVisitorAnalytic = new List<VisitorAnalytic>();
+
+            if (_getVisitorInfoObj.ResponseStatus == true)
+            {
+                if (_getVisitorInfoObj.lstVisitorAnalytic != null)
+                {
+                    lstVisitorAnalytic = _getVisitorInfoObj.lstVisitorAnalytic;
+                }
+            }
+
+            return PartialView("GetVisitorInfo",lstVisitorAnalytic);
         }
     }
 }

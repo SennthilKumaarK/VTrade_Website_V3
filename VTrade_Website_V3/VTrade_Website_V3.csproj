@@ -140,6 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin_assets\css\common.css" />
+    <Content Include="admin_assets\css\dataTables.bootstrap.min.css" />
+    <Content Include="admin_assets\css\font-awesome.min.css" />
+    <Content Include="admin_assets\css\jquery-ui.css" />
+    <Content Include="admin_assets\css\jquery.datetimepicker.css" />
+    <Content Include="admin_assets\css\responsive.bootstrap.min.css" />
     <Content Include="admin_assets\css\sb-admin-2.css" />
     <Content Include="admin_assets\css\sb-admin-2.min.css" />
     <Content Include="admin_assets\img\admin-user.jfif" />
@@ -152,10 +157,14 @@
     <Content Include="admin_assets\img\undraw_profile_3.svg" />
     <Content Include="admin_assets\img\undraw_rocket.svg" />
     <Content Include="admin_assets\img\user-profile.jfif" />
+    <Content Include="admin_assets\js\dataTables.bootstrap4.min.js" />
     <Content Include="admin_assets\js\demo\chart-area-demo.js" />
     <Content Include="admin_assets\js\demo\chart-bar-demo.js" />
     <Content Include="admin_assets\js\demo\chart-pie-demo.js" />
     <Content Include="admin_assets\js\demo\datatables-demo.js" />
+    <Content Include="admin_assets\js\jquery-ui.min.js" />
+    <Content Include="admin_assets\js\jquery.dataTables.min.js" />
+    <Content Include="admin_assets\js\jquery.datetimepicker.full.js" />
     <Content Include="admin_assets\js\sb-admin-2.js" />
     <Content Include="admin_assets\js\sb-admin-2.min.js" />
     <Content Include="admin_assets\vendor\bootstrap\js\bootstrap.bundle.js" />
@@ -2270,6 +2279,8 @@
     <Content Include="Views\Shared\_LayoutAdminConsole.cshtml" />
     <Content Include="Views\AdminConsole\Dashboard.cshtml" />
     <Content Include="Views\AdminConsole\ChangePassword.cshtml" />
+    <Content Include="Views\AdminConsole\GetVisitorInfo.cshtml" />
+    <Content Include="Views\AdminConsole\Visitors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

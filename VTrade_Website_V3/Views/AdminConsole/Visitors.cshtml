@@ -1,0 +1,171 @@
+﻿<div class="row">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4" style="height: 800px; overflow: auto;">
+            <div class="card-header py-3 d-flex flex-row align-items-center">
+                <input type="text" autocomplete="off" name="txtDate" class="form-control" maxlength="10" placeholder="Date" id="txtDate" Style="width: 120px;" />&nbsp;&nbsp;
+                <button type="button" id="btnRefresh" class="btn btn-sm btn-primary shadow-sm">
+                    Refresh
+                </button>
+            </div>
+            <div id="divDataTable">
+                @*@Html.Partial("GetVisitorInfo")*@
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+<div class="modal fade" id="InfoModal" runat="server" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Info Box
+                </h5>
+            </div>
+            <div class="modal-body">
+                <asp:Label runat="server" ID="lblInfo" Text="" Style="font-size: 16px; padding-left: 0px;"></asp:Label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function showModal() {
+        $("#InfoModal").modal('show');
+    }
+
+    function isDate(txtDate) {
+        var currVal = txtDate;
+
+        if ((currVal == '') || (currVal.length != 10))
+            return false;
+
+        var dtArray = currVal.split("/");
+
+        if (dtArray == null)
+            return false;
+
+        //Checks for mm/dd/yyyy format.
+
+        dtDay = dtArray[0];
+        dtMonth = dtArray[1];
+        dtYear = dtArray[2];
+
+        if (dtMonth < 1 || dtMonth > 12)
+            return false;
+        else if (dtDay < 1 || dtDay > 31)
+            return false;
+        else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+            return false;
+        else if (dtMonth == 2) {
+            var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+            if (dtDay > 29 || (dtDay == 29 && !isleap))
+                return false;
+        }
+        return true;
+    }
+
+    function returnDateFormat(txtDate) {
+        var dtArray = txtDate.split("/");
+        var dtDay = dtArray[0];
+        var dtMonth = dtArray[1];
+        var dtYear = dtArray[2];
+
+        return dtYear + dtMonth + dtDay;
+    }
+
+    function LoadVisitorInfo(txtDate) {
+
+        //            spinner_On();
+        $('#VisitorInfoGrid').show();
+        var datatable = $('#VisitorInfoGrid').DataTable
+            ({
+                //"sAjaxSource": "/AdminConsole/GetVisitorInfo?txtDate=" + txtDate,
+                "ajax": {
+                    "url": "/AdminConsole/Index?txtDate=" + txtDate,
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "bServerSide": true,
+                "destroy": true,
+                "bProcessing": true,
+                "bSearchable": true,
+                "order": [[2, 'desc']],
+                "iDisplayLength": 25,
+                "language": {
+                    "emptyTable": "No record found.",
+                    "processing":
+                        '<span>Loading...</span> '
+                },
+                "columns": [
+                    { mData: 'ANTRDATE' },
+                    { mData: 'ANTRTIME' },
+                    { mData: 'ANSESID' },
+                    { mData: 'ANIPDET' },
+                    { mData: 'ANBROW' },
+                    { mData: 'ANBROWVER' },
+                    { mData: 'ANOPRSYS' },
+                ],
+                fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    console.log(aData);
+                    $('#VisitorInfoGrid').show();
+                }
+            });
+        //spinner_Off();
+    }
+
+    // Filter Options Submit Event
+    $('#btnRefresh').click(function () {
+
+        var txtDateVal = $('#txtDate').val();
+        if (isDate(txtDateVal))
+
+        {
+            //LoadVisitorInfo(returnDateFormat($('#txtDate').val()));
+
+            $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+
+        }
+        else {
+            showModal();
+            $("#lblInfo").val("Invalid Date.");
+            $("#lblInfo").html("Invalid Date.")
+            return false;
+        }
+
+    });
+
+    $(document).ready(function () {
+
+        // Date picker
+        $("#txtDate").datepicker({
+            dateFormat: 'dd/mm/yy',
+            maxDate: 0,
+            //minDate: 0,
+            autoclose: true,
+            todayhighlight: 'true'
+        });
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        var todayDate = dd + "/" + mm + "/" + yyyy;
+        $('#txtDate').val(todayDate);
+
+
+        $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+
+    });
+</script>

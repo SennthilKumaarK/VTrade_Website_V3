@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DAL.VisitorAnalytic>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="tblVisitorInfoGrid" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Session ID
+                    </th>
+                    <th>
+                        IP Address
+                    </th>
+                    <th>
+                        Browser Name
+                    </th>
+                    <th>
+                        Browser Version
+                    </th>
+                    <th>
+                        Operating System
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var mItem in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANTRDATE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANTRTIME)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANSESID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANIPDET)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANBROW)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANBROWVER)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ANOPRSYS)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tblVisitorInfoGrid").DataTable(
+            {
+                searching: false,
+                ordering: false
+            }
+        );
+
+        
+    });
+</script>

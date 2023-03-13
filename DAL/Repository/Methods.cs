@@ -630,6 +630,29 @@ namespace DAL.Repository
             return _getDashboardChartDataObj;
         }
 
+        public _getVisitorInfo GetVisitorInfo(string txtDate)
+        {
+            _getVisitorInfo _getVisitorInfoObj = new _getVisitorInfo();
+
+            try
+            {
+                var _VisitorAnalyticList = (from _VisitorAnalytic in entityobj.VisitorAnalytics
+                                     where (_VisitorAnalytic.ANTRDATE == txtDate)
+                                     select _VisitorAnalytic).ToList();
+
+                _getVisitorInfoObj.lstVisitorAnalytic = _VisitorAnalyticList;
+                _getVisitorInfoObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getVisitorInfoObj.ResponseStatus = false;
+                _getVisitorInfoObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getVisitorInfoObj;
+        }
+
 
         public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)
         {
