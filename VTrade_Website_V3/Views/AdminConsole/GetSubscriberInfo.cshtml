@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<DAL.SubscribeDetail>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="tblSubscriberInfoGrid" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Email ID
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var mItem in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.SubscribeDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.SubscribeTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.SubscribeEmail)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tblSubscriberInfoGrid").DataTable(
+            {
+                searching: false,
+                ordering: false
+            }
+        );
+    });
+</script>

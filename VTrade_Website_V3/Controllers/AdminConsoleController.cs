@@ -33,12 +33,6 @@ namespace VTrade_Website_V3.Controllers
             return View();
         }
 
-        [UserSessionAttribute]
-        public ActionResult Visitors()
-        {
-            return View();
-        }
-
         private void LoadDDLYear()
         {
             try
@@ -234,6 +228,13 @@ namespace VTrade_Website_V3.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        [UserSessionAttribute]
+        public ActionResult Visitors()
+        {
+            return View();
+        }
+
         public ActionResult GetVisitorInfo(string txtDate)
         {
             Methods Repobj = new Methods();
@@ -251,5 +252,31 @@ namespace VTrade_Website_V3.Controllers
 
             return PartialView("GetVisitorInfo",lstVisitorAnalytic);
         }
+
+        [UserSessionAttribute]
+        public ActionResult Subscribers()
+        {
+            return View();
+        }
+
+        public ActionResult GetSubscriberInfo()
+        {
+            Methods Repobj = new Methods();
+            _getSubcriberInfo _getSubcriberInfoObj = new _getSubcriberInfo();
+            _getSubcriberInfoObj = Repobj.GetSubscriberInfo();
+            List<SubscribeDetail> lstSubscribeDetail = new List<SubscribeDetail>();
+
+            if (_getSubcriberInfoObj.ResponseStatus == true)
+            {
+                if (_getSubcriberInfoObj.lstSubscribeDetail != null)
+                {
+                    lstSubscribeDetail = _getSubcriberInfoObj.lstSubscribeDetail;
+                }
+            }
+
+            return PartialView("GetSubscriberInfo", lstSubscribeDetail);
+        }
+
+
     }
 }

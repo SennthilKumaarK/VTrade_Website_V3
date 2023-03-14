@@ -63,6 +63,7 @@
     <Compile Include="Models\_chkLoginStatus.cs" />
     <Compile Include="Models\_getDashboardChartData.cs" />
     <Compile Include="Models\_getDashboardCount.cs" />
+    <Compile Include="Models\_getSubcriberInfo.cs" />
     <Compile Include="Models\_getUniqueYearVisitorAnalytics.cs" />
     <Compile Include="Models\_getUpdatePassword.cs" />
     <Compile Include="Models\_getVisitorInfo.cs" />

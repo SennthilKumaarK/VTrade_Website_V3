@@ -699,6 +699,40 @@ namespace DAL.Repository
             return _getVisitorInfoObj;
         }
 
+        public _getSubcriberInfo GetSubscriberInfo()
+        {
+            _getSubcriberInfo _getSubcriberInfoObj = new _getSubcriberInfo();
+            List<SubscribeDetail> lstObj = new List<SubscribeDetail>();
+
+            try
+            {
+                var _SubscribeDetailList = (from _SubscribeDetail in entityobj.SubscribeDetails
+                                            select _SubscribeDetail).ToList();
+
+                foreach (var item in _SubscribeDetailList)
+                {
+                    SubscribeDetail SubscribeDetailObj = new SubscribeDetail();
+
+                    SubscribeDetailObj.SubscribeDate = CTODate(item.SubscribeDate);
+                    SubscribeDetailObj.SubscribeTime = CTOTime(item.SubscribeTime);
+                    SubscribeDetailObj.SubscribeEmail = item.SubscribeEmail;
+
+                    lstObj.Add(SubscribeDetailObj);
+                }
+
+                _getSubcriberInfoObj.lstSubscribeDetail = lstObj;
+                _getSubcriberInfoObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getSubcriberInfoObj.ResponseStatus = false;
+                _getSubcriberInfoObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getSubcriberInfoObj;
+        }
+
 
         public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)
         {
