@@ -4,7 +4,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">
-                Subscribers
+                Contact Users
             </h1>
         </div>
         <!-- DataTales Example -->
@@ -51,10 +51,10 @@
 
     // Filter Options Submit Event
     $('#btnRefresh').click(function () {
-        $("#divDataTable").load("/AdminConsole/GetSubscriberInfo");
+        $("#divDataTable").load("/AdminConsole/GetContactUsersInfo");
     });
 
     $(document).ready(function () {
-        $("#divDataTable").load("/AdminConsole/GetSubscriberInfo");
+        $("#divDataTable").load("/AdminConsole/GetContactUsersInfo");
     });
 </script>

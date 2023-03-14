@@ -733,6 +733,42 @@ namespace DAL.Repository
             return _getSubcriberInfoObj;
         }
 
+        public _getContactInfo GetContactUsersInfo()
+        {
+            _getContactInfo _getContactInfoObj = new _getContactInfo();
+            List<ContactDetail> lstObj = new List<ContactDetail>();
+
+            try
+            {
+                var _ContactDetailList = (from _ContactDetail in entityobj.ContactDetails
+                                            select _ContactDetail).ToList();
+
+                foreach (var item in _ContactDetailList)
+                {
+                    ContactDetail ContactDetailObj = new ContactDetail();
+
+                    ContactDetailObj.ContactDate = CTODate(item.ContactDate);
+                    ContactDetailObj.ContactTime = CTOTime(item.ContactTime);
+                    ContactDetailObj.ContactName = item.ContactName;
+                    ContactDetailObj.ContactEmail = item.ContactEmail;
+                    ContactDetailObj.ContactNumber = item.ContactNumber;
+                    ContactDetailObj.ContactMessage = item.ContactMessage;
+
+                    lstObj.Add(ContactDetailObj);
+                }
+
+                _getContactInfoObj.lstContactDetail = lstObj;
+                _getContactInfoObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getContactInfoObj.ResponseStatus = false;
+                _getContactInfoObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getContactInfoObj;
+        }
 
         public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)
         {

@@ -2281,6 +2281,10 @@
     <Content Include="Views\AdminConsole\ChangePassword.cshtml" />
     <Content Include="Views\AdminConsole\GetVisitorInfo.cshtml" />
     <Content Include="Views\AdminConsole\Visitors.cshtml" />
+    <Content Include="Views\AdminConsole\ContactUsers.cshtml" />
+    <Content Include="Views\AdminConsole\GetContactUsersInfo.cshtml" />
+    <Content Include="Views\AdminConsole\GetSubscriberInfo.cshtml" />
+    <Content Include="Views\AdminConsole\Subscribers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

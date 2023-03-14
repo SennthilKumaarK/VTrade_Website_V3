@@ -277,6 +277,29 @@ namespace VTrade_Website_V3.Controllers
             return PartialView("GetSubscriberInfo", lstSubscribeDetail);
         }
 
+        [UserSessionAttribute]
+        public ActionResult ContactUsers()
+        {
+            return View();
+        }
+
+        public ActionResult GetContactUsersInfo()
+        {
+            Methods Repobj = new Methods();
+            _getContactInfo _getContactInfoObj = new _getContactInfo();
+            _getContactInfoObj = Repobj.GetContactUsersInfo();
+            List<ContactDetail> lstContactDetail = new List<ContactDetail>();
+
+            if (_getContactInfoObj.ResponseStatus == true)
+            {
+                if (_getContactInfoObj.lstContactDetail != null)
+                {
+                    lstContactDetail = _getContactInfoObj.lstContactDetail;
+                }
+            }
+
+            return PartialView("GetContactUsersInfo", lstContactDetail);
+        }
 
     }
 }
