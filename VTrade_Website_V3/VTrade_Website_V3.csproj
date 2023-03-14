@@ -143,6 +143,7 @@
     <Content Include="admin_assets\css\dataTables.bootstrap.min.css" />
     <Content Include="admin_assets\css\font-awesome.min.css" />
     <Content Include="admin_assets\css\jquery-ui.css" />
+    <Content Include="admin_assets\css\jquery.datatable.min.css" />
     <Content Include="admin_assets\css\jquery.datetimepicker.css" />
     <Content Include="admin_assets\css\responsive.bootstrap.min.css" />
     <Content Include="admin_assets\css\sb-admin-2.css" />

@@ -117,6 +117,33 @@ namespace VTrade_Website_V3.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetLoginUserName()
+        {
+            ChkUserResponseData res = new ChkUserResponseData();
+            try
+            {
+
+                if (HttpContext.Session["USERNAME"] != null)
+                {
+                    res.ResponseSuccess = true;
+                    res.ResponseMessage = HttpContext.Session["USERNAME"].ToString();
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult CheckLoginStatus(string User_Name, string User_Password)
         {
             ChkUserResponseData res = new ChkUserResponseData();
@@ -250,7 +277,7 @@ namespace VTrade_Website_V3.Controllers
                 }
             }
 
-            return PartialView("GetVisitorInfo",lstVisitorAnalytic);
+            return PartialView("GetVisitorInfo", lstVisitorAnalytic);
         }
 
         [UserSessionAttribute]
