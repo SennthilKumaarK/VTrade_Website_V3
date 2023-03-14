@@ -11,6 +11,36 @@ namespace DAL.Repository
     {
         VtradellcdbEntities entityobj = new VtradellcdbEntities();
 
+        public string CTODate(string sText)
+        {
+            if (!string.IsNullOrEmpty(sText) && sText.Length > 7)
+            {
+                sText = sText.Substring(6, 2) + "/" + sText.Substring(4, 2) + "/" + sText.Substring(0, 4);
+                return sText;
+            }
+            else
+            {
+                //string sToday = DateTime.Now.ToString("dd/MM/yyyy");
+                //return sToday;
+                return string.Empty;
+            }
+        }
+
+        public string CTOTime(string sText)
+        {
+            if (!string.IsNullOrEmpty(sText) && sText.Length > 5)
+            {
+                sText = sText.Substring(0, 2) + ":" + sText.Substring(2, 2) + ":" + sText.Substring(4, 2);
+                return sText;
+            }
+            else
+            {
+                //string sToday = DateTime.Now.ToString("dd/MM/yyyy");
+                //return sToday;
+                return string.Empty;
+            }
+        }
+
         public _getCategoryItems getCategoryItems()
         {
             _getCategoryItems _getCategoryItemsObj = new _getCategoryItems();
@@ -633,14 +663,30 @@ namespace DAL.Repository
         public _getVisitorInfo GetVisitorInfo(string txtDate)
         {
             _getVisitorInfo _getVisitorInfoObj = new _getVisitorInfo();
+            List<VisitorAnalytic> lstObj = new List<VisitorAnalytic>();
 
             try
             {
                 var _VisitorAnalyticList = (from _VisitorAnalytic in entityobj.VisitorAnalytics
-                                     where (_VisitorAnalytic.ANTRDATE == txtDate)
-                                     select _VisitorAnalytic).ToList();
+                                            where (_VisitorAnalytic.ANTRDATE == txtDate)
+                                            select _VisitorAnalytic).ToList();
 
-                _getVisitorInfoObj.lstVisitorAnalytic = _VisitorAnalyticList;
+                foreach (var item in _VisitorAnalyticList)
+                {
+                    VisitorAnalytic VisitorAnalyticObj = new VisitorAnalytic();
+
+                    VisitorAnalyticObj.ANTRDATE = CTODate(item.ANTRDATE);
+                    VisitorAnalyticObj.ANTRTIME = CTOTime(item.ANTRTIME);
+                    VisitorAnalyticObj.ANSESID = item.ANSESID;
+                    VisitorAnalyticObj.ANIPDET = item.ANIPDET;
+                    VisitorAnalyticObj.ANBROW = item.ANBROW;
+                    VisitorAnalyticObj.ANBROWVER = item.ANBROWVER;
+                    VisitorAnalyticObj.ANOPRSYS = item.ANOPRSYS;
+
+                    lstObj.Add(VisitorAnalyticObj);
+                }
+
+                _getVisitorInfoObj.lstVisitorAnalytic = lstObj;
                 _getVisitorInfoObj.ResponseStatus = true;
 
             }
