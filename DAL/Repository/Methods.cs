@@ -4,12 +4,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DAL.Repository
 {
     public class Methods
     {
         VtradellcdbEntities entityobj = new VtradellcdbEntities();
+
+        public void VisitorLog()
+        {
+            try
+            {
+                String ANTRDATE, ANTRTIME, ANSESID, ANIPDET, ANBROW, ANBROWVER, ANOPRSYS, ANTRYEAR, ANTRMONTH = string.Empty;
+
+                string sAbsolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+
+                if (!sAbsolutePath.ToLower().Contains("adminconsole"))
+                {
+                    ANTRDATE = DateTime.Now.ToString("yyyyMMdd");
+                    ANTRYEAR = DateTime.Now.ToString("yyyy");
+                    ANTRMONTH = DateTime.Now.ToString("MM");
+                    ANTRTIME = DateTime.Now.ToString("HHmmss");
+                    ANSESID = System.Web.HttpContext.Current.Session.SessionID;
+                    ANIPDET = System.Web.HttpContext.Current.Request.ServerVariables["remote_addr"];
+
+                    HttpBrowserCapabilities BCaps;
+                    BCaps = System.Web.HttpContext.Current.Request.Browser;
+
+                    ANBROW = BCaps.Browser;
+                    ANBROWVER = BCaps.Version;
+                    ANOPRSYS = BCaps.Platform;
+
+                    VisitorAnalytic objVisitorAnalytic = new VisitorAnalytic();
+                    objVisitorAnalytic.ANTRDATE = ANTRDATE;
+                    objVisitorAnalytic.ANTRTIME = ANTRTIME;
+                    objVisitorAnalytic.ANSESID = ANSESID;
+                    objVisitorAnalytic.ANIPDET = ANIPDET;
+                    objVisitorAnalytic.ANBROW = ANBROW;
+                    objVisitorAnalytic.ANBROWVER = ANBROWVER;
+                    objVisitorAnalytic.ANOPRSYS = ANOPRSYS;
+                    objVisitorAnalytic.ANTRYEAR = ANTRYEAR;
+                    objVisitorAnalytic.ANTRMONTH = ANTRMONTH;
+
+                    entityobj.VisitorAnalytics.Add(objVisitorAnalytic);
+                    entityobj.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public string CTODate(string sText)
         {
@@ -741,7 +787,7 @@ namespace DAL.Repository
             try
             {
                 var _ContactDetailList = (from _ContactDetail in entityobj.ContactDetails
-                                            select _ContactDetail).ToList();
+                                          select _ContactDetail).ToList();
 
                 foreach (var item in _ContactDetailList)
                 {

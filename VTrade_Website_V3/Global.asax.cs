@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,13 @@ namespace VTrade_Website_V3
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        private void Session_Start()
+        {
+            Methods obj = new Methods();
+            obj.VisitorLog();
+
         }
     }
 }
