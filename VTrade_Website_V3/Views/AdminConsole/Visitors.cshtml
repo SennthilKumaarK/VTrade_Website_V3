@@ -8,7 +8,7 @@
             </h1>
         </div>
         <!-- DataTales Example -->
-        <div class="card shadow mb-4" style="height: auto; overflow: auto;">
+        <div class="card shadow mb-4" style="height: 700px; overflow: auto;">
             <div class="card-header py-3 d-flex flex-row align-items-center">
                 <input type="text" autocomplete="off" name="txtDate" class="form-control" maxlength="10" placeholder="Date" id="txtDate" Style="width: 120px;" />&nbsp;&nbsp;
                 <button type="button" id="btnRefresh" class="btn btn-sm btn-primary shadow-sm">
@@ -17,6 +17,8 @@
             </div>
             <div id="divDataTable">
                 @*@Html.Partial("GetVisitorInfo")*@
+            </div>
+            <div id="visitor_loader" class="progressloader" style="display:none;">
             </div>
         </div>
     </div>
@@ -140,7 +142,15 @@
         {
             //LoadVisitorInfo(returnDateFormat($('#txtDate').val()));
 
-            $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+            $('#visitor_loader').show();
+            $("#divDataTable").hide();
+            setTimeout(function () {
+
+                $('#visitor_loader').hide();
+                $("#divDataTable").show();
+                $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+
+            }, 2000);
 
         }
         else {
@@ -170,8 +180,16 @@
         var todayDate = dd + "/" + mm + "/" + yyyy;
         $('#txtDate').val(todayDate);
 
+        $('#visitor_loader').show();
+        $("#divDataTable").hide();
+        setTimeout(function () {
 
-        $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+            $('#visitor_loader').hide();
+            $("#divDataTable").show();
+            $("#divDataTable").load("/AdminConsole/GetVisitorInfo?txtDate=" + returnDateFormat($('#txtDate').val()));
+
+        }, 2000);
+        
 
     });
 </script>

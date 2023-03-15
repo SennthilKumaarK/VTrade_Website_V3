@@ -62,8 +62,9 @@
     $(document).ready(function () {
         $("#tblContactUsersInfoGrid").DataTable(
             {
-                searching: false,
-                ordering: false
+                searching: true,
+                ordering: false,
+                pageLength: 10
             }
         );
     });

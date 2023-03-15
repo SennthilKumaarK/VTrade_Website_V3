@@ -1,4 +1,44 @@
-﻿.dropdown-list
+﻿
+/*--------------------------------------------------------------
+# Progressloader
+--------------------------------------------------------------*/
+.progressloader {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/admin_assets/img/loader.gif") top center;
+    background-repeat: no-repeat;
+}
+
+.progressloader-relative {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/admin_assets/img/loader.gif") top center;
+    background-repeat: no-repeat;
+}
+
+.progressloader-small {
+    position: absolute;
+    top: 0;
+    left: 80%;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/admin_assets/img/loader_small.gif") top center;
+    background-repeat: no-repeat;
+}
+
+.dropdown-list
 {
     color: #fff;
     font-size: 14px;

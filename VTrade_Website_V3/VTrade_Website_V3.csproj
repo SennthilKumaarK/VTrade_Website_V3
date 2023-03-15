@@ -149,14 +149,10 @@
     <Content Include="admin_assets\css\sb-admin-2.css" />
     <Content Include="admin_assets\css\sb-admin-2.min.css" />
     <Content Include="admin_assets\img\admin-user.jfif" />
-    <Content Include="admin_assets\img\admin-user.png" />
     <Content Include="admin_assets\img\favicon.png" />
-    <Content Include="admin_assets\img\undraw_posting_photo.svg" />
-    <Content Include="admin_assets\img\undraw_profile.svg" />
-    <Content Include="admin_assets\img\undraw_profile_1.svg" />
-    <Content Include="admin_assets\img\undraw_profile_2.svg" />
-    <Content Include="admin_assets\img\undraw_profile_3.svg" />
-    <Content Include="admin_assets\img\undraw_rocket.svg" />
+    <Content Include="admin_assets\img\loader.gif" />
+    <Content Include="admin_assets\img\ui-icons_444444_256x240.png" />
+    <Content Include="admin_assets\img\ui-icons_555555_256x240.png" />
     <Content Include="admin_assets\img\user-profile.jfif" />
     <Content Include="admin_assets\js\dataTables.bootstrap4.min.js" />
     <Content Include="admin_assets\js\demo\chart-area-demo.js" />
