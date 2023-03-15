@@ -1,0 +1,54 @@
+﻿<div class="row">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">
+                Products
+            </h1>
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4" style="height: 700px; overflow: auto;">
+            <div class="card-header py-3 d-flex flex-row align-items-center">
+                <button type="button" id="btnRefresh" class="btn btn-sm btn-primary shadow-sm">
+                    Refresh
+                </button>
+            </div>
+            <div id="divDataTable">
+
+            </div>
+            <div id="Product_loader" class="progressloader" style="display:none;">
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+<script type="text/javascript">
+
+    // Filter Options Submit Event
+    $('#btnRefresh').click(function () {
+        $('#Product_loader').show();
+        $("#divDataTable").hide();
+        setTimeout(function () {
+
+            $('#Product_loader').hide();
+            $("#divDataTable").show();
+            $("#divDataTable").load("/AdminConsole/GetProductsInfo");
+
+        }, 2000);
+    });
+
+    $(document).ready(function () {
+
+        $('#Product_loader').show();
+        $("#divDataTable").hide();
+        setTimeout(function () {
+
+            $('#Product_loader').hide();
+            $("#divDataTable").show();
+            $("#divDataTable").load("/AdminConsole/GetProductsInfo");
+
+        }, 2000);
+    });
+</script>

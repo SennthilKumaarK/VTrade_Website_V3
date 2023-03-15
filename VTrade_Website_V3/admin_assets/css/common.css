@@ -1,4 +1,27 @@
-﻿
+﻿.buttonSubmit {
+    padding: 10px 30px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    transition: 0.4s;
+    background-color: #B7A318;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+}
+
+.buttonCancel {
+    padding: 10px 30px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    transition: 0.4s;
+    background-color: orangered;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+}
+
 /*--------------------------------------------------------------
 # Progressloader
 --------------------------------------------------------------*/

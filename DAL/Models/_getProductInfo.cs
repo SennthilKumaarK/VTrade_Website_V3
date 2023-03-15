@@ -10,6 +10,9 @@ namespace DAL.Models
     {
         public Boolean ResponseStatus { get; set; }
         public string ErrorMessage { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDesc { get; set; }
         public List<ProductInfo> lstProductInfo { get; set; }
     }
 }

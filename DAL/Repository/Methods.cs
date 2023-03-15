@@ -189,14 +189,18 @@ namespace DAL.Repository
             {
                 List<ProductInfo> lstProductInfoObj = new List<ProductInfo>();
 
-                var result = (from prod in entityobj.ProductInfoes
-                              where (prod.Status != "D") && (prod.ProductID == ProductID)
+                var result = (from prodInfo in entityobj.ProductInfoes
+                              join proditem in entityobj.ProductItems on prodInfo.ProductID equals proditem.ID
+                              where (prodInfo.Status != "D") && (proditem.Status != "D") && (prodInfo.ProductID == ProductID)
                               select new
                               {
-                                  ID = prod.ID,
-                                  KeyName = prod.KeyName,
-                                  KeyValue = prod.KeyValue
-                              }).OrderBy(r => r.ID).ToList();
+                                  ProdID = proditem.ID,
+                                  ProdInfoID = prodInfo.ID,
+                                  ProductName = proditem.ProductName,
+                                  ProductDesc = proditem.ProductDesc,
+                                  KeyName = prodInfo.KeyName,
+                                  KeyValue = prodInfo.KeyValue
+                              }).OrderBy(r => r.ProdInfoID).ToList();
 
                 foreach (var item in result)
                 {
@@ -206,6 +210,13 @@ namespace DAL.Repository
                     ProductInfoObj.KeyValue = item.KeyValue;
 
                     lstProductInfoObj.Add(ProductInfoObj);
+                }
+
+                if ((result != null) && (result.Count > 0))
+                {
+                    _getProductInfoObj.ProductID = result[0].ProdID;
+                    _getProductInfoObj.ProductName = result[0].ProductName;
+                    _getProductInfoObj.ProductDesc = result[0].ProductDesc;
                 }
 
                 _getProductInfoObj.ResponseStatus = true;
@@ -541,6 +552,157 @@ namespace DAL.Repository
             return _getUpdatePasswordObj;
         }
 
+        public _getUpdatePassword UpdateProductItemInfo(string ProductName, string ProductDesc, int ProdID)
+        {
+            _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+            try
+            {
+
+                ProductItem result = (from ProductItem in entityobj.ProductItems
+                                      where (ProductItem.ID == ProdID)
+                                      select ProductItem).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.ProductName = ProductName;
+                    result.ProductDesc = ProductDesc;
+                    entityobj.SaveChanges();
+
+                    _getUpdatePasswordObj.IsUpdated = true;
+                    _getUpdatePasswordObj.ErrorMessage = "";
+                }
+                else
+                {
+                    _getUpdatePasswordObj.IsUpdated = false;
+                    _getUpdatePasswordObj.ErrorMessage = "No records are found in Product Item";
+                }
+
+                _getUpdatePasswordObj.ResponseStatus = true;
+            }
+            catch (Exception ex)
+            {
+                _getUpdatePasswordObj.ResponseStatus = false;
+                _getUpdatePasswordObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getUpdatePasswordObj;
+        }
+
+        public _getUpdatePassword RemoveProductItemInfo(int ProdID)
+        {
+            _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+            try
+            {
+
+                var result = (from ProductInfo in entityobj.ProductInfoes
+                              where (ProductInfo.ProductID == ProdID)
+                              select ProductInfo).ToList();
+                if (result != null)
+                {
+                    foreach (var resultitem in result)
+                    {
+                        var removeRecord = (from ProductInfo in entityobj.ProductInfoes
+                                            where (ProductInfo.ID == resultitem.ID)
+                                            select ProductInfo).FirstOrDefault();
+                        if (removeRecord != null)
+                        {
+                            entityobj.ProductInfoes.Remove(removeRecord);
+                            entityobj.SaveChanges();
+                        }
+                    }
+                }
+                _getUpdatePasswordObj.IsUpdated = true;
+                _getUpdatePasswordObj.ErrorMessage = "";
+                _getUpdatePasswordObj.ResponseStatus = true;
+            }
+            catch (Exception ex)
+            {
+                _getUpdatePasswordObj.ResponseStatus = false;
+                _getUpdatePasswordObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getUpdatePasswordObj;
+        }
+
+        public _getUpdatePassword AddProductItemsInfo(ProductItemResponseData ProductItemResponseDataObj)
+        {
+            _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+            try
+            {
+
+                if (ProductItemResponseDataObj.KeyName1 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName1, ProductItemResponseDataObj.KeyValue1);
+                }
+                if (ProductItemResponseDataObj.KeyName2 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName2, ProductItemResponseDataObj.KeyValue2);
+                }
+                if (ProductItemResponseDataObj.KeyName3 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName3, ProductItemResponseDataObj.KeyValue3);
+                }
+                if (ProductItemResponseDataObj.KeyName4 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName4, ProductItemResponseDataObj.KeyValue4);
+                }
+                if (ProductItemResponseDataObj.KeyName5 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName5, ProductItemResponseDataObj.KeyValue5);
+                }
+                if (ProductItemResponseDataObj.KeyName6 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName6, ProductItemResponseDataObj.KeyValue6);
+                }
+                if (ProductItemResponseDataObj.KeyName7 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName7, ProductItemResponseDataObj.KeyValue7);
+                }
+                if (ProductItemResponseDataObj.KeyName8 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName8, ProductItemResponseDataObj.KeyValue8);
+                }
+                if (ProductItemResponseDataObj.KeyName9 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName9, ProductItemResponseDataObj.KeyValue9);
+                }
+                if (ProductItemResponseDataObj.KeyName10 != null)
+                {
+                    AddProductItemsInfo(ProductItemResponseDataObj.ProductID, ProductItemResponseDataObj.KeyName10, ProductItemResponseDataObj.KeyValue10);
+                }
+
+                _getUpdatePasswordObj.IsUpdated = true;
+                _getUpdatePasswordObj.ErrorMessage = "";
+                _getUpdatePasswordObj.ResponseStatus = true;
+            }
+            catch (Exception ex)
+            {
+                _getUpdatePasswordObj.ResponseStatus = false;
+                _getUpdatePasswordObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getUpdatePasswordObj;
+        }
+
+        private void AddProductItemsInfo(int ProductID, string KeyName, string KeyValue)
+        {
+            try
+            {
+                ProductInfo objProductInfo = new ProductInfo();
+                objProductInfo.ProductID = ProductID;
+                objProductInfo.KeyName = KeyName;
+                objProductInfo.KeyValue = KeyValue;
+                objProductInfo.Status = "Y";
+
+                entityobj.ProductInfoes.Add(objProductInfo);
+                entityobj.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public _getCountryCodes getCountryCodeList()
         {
             _getCountryCodes _getCountryCodesObj = new _getCountryCodes();
@@ -814,6 +976,53 @@ namespace DAL.Repository
             }
 
             return _getContactInfoObj;
+        }
+
+        public _getProductItems GetProductItemsInfo()
+        {
+            _getProductItems _getProductItemsObj = new _getProductItems();
+            List<ProductListInfo> lstObj = new List<ProductListInfo>();
+
+            try
+            {
+                var _ProductItemList = (from prod in entityobj.ProductItems
+                                        join Brands in entityobj.BrandItems on prod.BrandID equals Brands.ID
+                                        join catitems in entityobj.CategoryItems on prod.CatID equals catitems.ID
+                                        where (prod.Status != "D") && (Brands.Status != "D") && (catitems.Status != "D")
+                                        select new
+                                        {
+                                            prod.ID,
+                                            prod.ProductName,
+                                            prod.ProductImgPath,
+                                            prod.ProductDesc,
+                                            Brands.BrandName,
+                                            catitems.CategoryName
+                                        }).ToList();
+
+                foreach (var item in _ProductItemList)
+                {
+                    ProductListInfo ProductListInfoObj = new ProductListInfo();
+
+                    ProductListInfoObj.ID = item.ID;
+                    ProductListInfoObj.ProductName = item.ProductName;
+                    ProductListInfoObj.ProductDesc = item.ProductDesc;
+                    ProductListInfoObj.CategoryName = item.CategoryName;
+                    ProductListInfoObj.BrandName = item.BrandName;
+
+                    lstObj.Add(ProductListInfoObj);
+                }
+
+                _getProductItemsObj.lstProductItem = lstObj;
+                _getProductItemsObj.ResponseStatus = true;
+
+            }
+            catch (Exception ex)
+            {
+                _getProductItemsObj.ResponseStatus = false;
+                _getProductItemsObj.ErrorMessage = ex.Message.ToString();
+            }
+
+            return _getProductItemsObj;
         }
 
         public _chkLoginStatus getLoginStatus(string User_Name, string User_Password)

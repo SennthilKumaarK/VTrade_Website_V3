@@ -328,5 +328,195 @@ namespace VTrade_Website_V3.Controllers
             return PartialView("GetContactUsersInfo", lstContactDetail);
         }
 
+        [UserSessionAttribute]
+        public ActionResult Products()
+        {
+            return View();
+        }
+
+        public ActionResult GetProductsInfo()
+        {
+            Methods Repobj = new Methods();
+            _getProductItems _getProductItemsObj = new _getProductItems();
+            _getProductItemsObj = Repobj.GetProductItemsInfo();
+            List<ProductListInfo> lstProductListInfo = new List<ProductListInfo>();
+
+            if (_getProductItemsObj.ResponseStatus == true)
+            {
+                if (_getProductItemsObj.lstProductItem != null)
+                {
+                    lstProductListInfo = _getProductItemsObj.lstProductItem;
+                }
+            }
+
+            return PartialView("GetProductsInfo", lstProductListInfo);
+        }
+
+        [UserSessionAttribute]
+        public ActionResult UpdateProductInfo(int ProductID)
+        {
+            Methods Repobj = new Methods();
+            _getProductInfo _getProductInfoObj = new _getProductInfo();
+            _getProductInfoObj = Repobj.getProductInfo(ProductID);
+            
+            ProductItemResponseData ProductItemResponseDataObj = new ProductItemResponseData();
+            List<ProductInfo> lstProductInfo = new List<ProductInfo>();
+
+            if (_getProductInfoObj.ResponseStatus == true)
+            {
+                ProductItemResponseDataObj.ProductID = _getProductInfoObj.ProductID;
+                ProductItemResponseDataObj.ProductName = _getProductInfoObj.ProductName;
+                ProductItemResponseDataObj.ProductDesc = _getProductInfoObj.ProductDesc;
+                lstProductInfo = _getProductInfoObj.lstProductInfo;
+
+                if (lstProductInfo != null)
+                {
+                    if (lstProductInfo.Count > 0)
+                    {
+                        ProductItemResponseDataObj.KeyName1 = lstProductInfo[0].KeyName;
+                        ProductItemResponseDataObj.KeyValue1 = lstProductInfo[0].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 1)
+                    {
+                        ProductItemResponseDataObj.KeyName2 = lstProductInfo[1].KeyName;
+                        ProductItemResponseDataObj.KeyValue2 = lstProductInfo[1].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 2)
+                    {
+                        ProductItemResponseDataObj.KeyName3 = lstProductInfo[2].KeyName;
+                        ProductItemResponseDataObj.KeyValue3 = lstProductInfo[2].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 3)
+                    {
+                        ProductItemResponseDataObj.KeyName4 = lstProductInfo[3].KeyName;
+                        ProductItemResponseDataObj.KeyValue4 = lstProductInfo[3].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 4)
+                    {
+                        ProductItemResponseDataObj.KeyName5 = lstProductInfo[4].KeyName;
+                        ProductItemResponseDataObj.KeyValue5 = lstProductInfo[4].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 5)
+                    {
+                        ProductItemResponseDataObj.KeyName6 = lstProductInfo[5].KeyName;
+                        ProductItemResponseDataObj.KeyValue6 = lstProductInfo[5].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 6)
+                    {
+                        ProductItemResponseDataObj.KeyName7 = lstProductInfo[6].KeyName;
+                        ProductItemResponseDataObj.KeyValue7 = lstProductInfo[6].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 7)
+                    {
+                        ProductItemResponseDataObj.KeyName8 = lstProductInfo[7].KeyName;
+                        ProductItemResponseDataObj.KeyValue8 = lstProductInfo[7].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 8)
+                    {
+                        ProductItemResponseDataObj.KeyName9 = lstProductInfo[8].KeyName;
+                        ProductItemResponseDataObj.KeyValue9 = lstProductInfo[8].KeyValue;
+                    }
+                    if (lstProductInfo.Count > 9)
+                    {
+                        ProductItemResponseDataObj.KeyName10 = lstProductInfo[9].KeyName;
+                        ProductItemResponseDataObj.KeyValue10 = lstProductInfo[9].KeyValue;
+                    }
+                }
+            }
+
+            return View(ProductItemResponseDataObj);
+        }
+
+
+        [HttpPost]
+        public JsonResult UpdateProductItemInfo(ProductItemResponseData ProductItemResponseDataObj)
+        {
+            ChkUserResponseData res = new ChkUserResponseData();
+            try
+            {
+
+                Methods Repobj = new Methods();
+                _getUpdatePassword _getUpdatePasswordObj = new _getUpdatePassword();
+
+                _getUpdatePasswordObj = Repobj.UpdateProductItemInfo(ProductItemResponseDataObj.ProductName, ProductItemResponseDataObj.ProductDesc, ProductItemResponseDataObj.ProductID);
+
+                if (_getUpdatePasswordObj.ResponseStatus == true)
+                {
+                    if (_getUpdatePasswordObj.IsUpdated == true)
+                    {
+
+                        _getUpdatePasswordObj = new _getUpdatePassword();
+                        _getUpdatePasswordObj = Repobj.RemoveProductItemInfo( ProductItemResponseDataObj.ProductID);
+
+
+                        if (_getUpdatePasswordObj.ResponseStatus == true)
+                        {
+                            if (_getUpdatePasswordObj.IsUpdated == true)
+                            {
+
+                                _getUpdatePasswordObj = new _getUpdatePassword();
+                                _getUpdatePasswordObj = Repobj.AddProductItemsInfo(ProductItemResponseDataObj);
+
+
+                                if (_getUpdatePasswordObj.ResponseStatus == true)
+                                {
+                                    if (_getUpdatePasswordObj.IsUpdated == true)
+                                    {
+
+                                        res.ResponseSuccess = true;
+                                        res.ResponseMessage = "";
+
+                                    }
+                                    else
+                                    {
+                                        res.ResponseSuccess = false;
+                                        res.ResponseMessage = _getUpdatePasswordObj.ErrorMessage;
+                                    }
+                                }
+                                else
+                                {
+                                    res.ResponseSuccess = false;
+                                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                res.ResponseSuccess = false;
+                                res.ResponseMessage = _getUpdatePasswordObj.ErrorMessage;
+                            }
+                        }
+                        else
+                        {
+                            res.ResponseSuccess = false;
+                            res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        res.ResponseSuccess = false;
+                        res.ResponseMessage = _getUpdatePasswordObj.ErrorMessage;
+                    }
+                }
+                else
+                {
+                    res.ResponseSuccess = false;
+                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.ResponseSuccess = false;
+                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }
