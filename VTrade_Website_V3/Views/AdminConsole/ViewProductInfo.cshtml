@@ -1,0 +1,87 @@
+﻿@model DAL.Models.ProductItemResponseData
+
+<div class="row">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">
+                View Product Information
+            </h1>
+        </div>
+        <div class="card-body">
+            <form id="frmViewProductInfo">
+                <div class="ProdInfo-element" runat="server">
+                    @Html.HiddenFor(m => Model.ProductID, new { @ID = "txtProdID" })
+                    <div class="form-group box1">
+                        <label>Product Name</label>
+                        @Html.TextBoxFor(m => Model.ProductName, new { @class = "form-control", @ID = "txtProdName", @MaxLength = "85" })
+                    </div>
+                    <div class="form-group box2">
+                        <label>Product Description</label>
+                        @Html.TextAreaFor(m => Model.ProductDesc, new { @class = "form-control", @ID = "txtProdDesc", @Rows = "2", @Cols = "20", @MaxLength = "2000" })
+                    </div>
+                    <div class="form-group box3">
+                        <label>Info1</label>
+                        @Html.TextBoxFor(m => Model.KeyName1, new { @class = "form-control", @ID = "txtKeyName1", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue1, new { @class = "form-control", @ID = "txtKeyValue1", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box4">
+                        <label>Info2</label>
+                        @Html.TextBoxFor(m => Model.KeyName2, new { @class = "form-control", @ID = "txtKeyName2", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue2, new { @class = "form-control", @ID = "txtKeyValue2", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box5">
+                        <label>Info3</label>
+                        @Html.TextBoxFor(m => Model.KeyName3, new { @class = "form-control", @ID = "txtKeyName3", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue3, new { @class = "form-control", @ID = "txtKeyValue3", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box6">
+                        <label>Info4</label>
+                        @Html.TextBoxFor(m => Model.KeyName4, new { @class = "form-control", @ID = "txtKeyName4", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue4, new { @class = "form-control", @ID = "txtKeyValue4", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box7">
+                        <label>Info5</label>
+                        @Html.TextBoxFor(m => Model.KeyName5, new { @class = "form-control", @ID = "txtKeyName5", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue5, new { @class = "form-control", @ID = "txtKeyValue5", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box8">
+                        <label>Info6</label>
+                        @Html.TextBoxFor(m => Model.KeyName6, new { @class = "form-control", @ID = "txtKeyName6", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue6, new { @class = "form-control", @ID = "txtKeyValue6", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box9">
+                        <label>Info7</label>
+                        @Html.TextBoxFor(m => Model.KeyName7, new { @class = "form-control", @ID = "txtKeyName7", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue7, new { @class = "form-control", @ID = "txtKeyValue7", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box10">
+                        <label>Info8</label>
+                        @Html.TextBoxFor(m => Model.KeyName8, new { @class = "form-control", @ID = "txtKeyName8", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue8, new { @class = "form-control", @ID = "txtKeyValue8", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box11">
+                        <label>Info9</label>
+                        @Html.TextBoxFor(m => Model.KeyName9, new { @class = "form-control", @ID = "txtKeyName9", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue9, new { @class = "form-control", @ID = "txtKeyValue9", @MaxLength = "500" })
+                    </div>
+                    <div class="form-group box12">
+                        <label>Info10</label>
+                        @Html.TextBoxFor(m => Model.KeyName10, new { @class = "form-control", @ID = "txtKeyName10", @MaxLength = "85" })
+                        @Html.TextBoxFor(m => Model.KeyValue10, new { @class = "form-control", @ID = "txtKeyValue10", @MaxLength = "500" })
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="text-center">
+                <button class="buttonCancel" type="button" data-dismiss="modal" onclick="location.href='@Url.Action("Products","AdminConsole")'">
+                    Back
+                </button>
+            </div>
+            <div id="Product_loader" class="progressloader" style="display:none;">
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>

@@ -2287,6 +2287,7 @@
     <Content Include="Views\AdminConsole\GetProductsInfo.cshtml" />
     <Content Include="Views\AdminConsole\Products.cshtml" />
     <Content Include="Views\AdminConsole\UpdateProductInfo.cshtml" />
+    <Content Include="Views\AdminConsole\ViewProductInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
