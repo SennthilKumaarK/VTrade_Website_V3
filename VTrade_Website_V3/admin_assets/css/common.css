@@ -171,3 +171,36 @@
 {
     background-color: #C9A357;
 }
+
+.changepwd-Width-Layout {
+    width: 40%;
+}
+
+@media (max-width: 400px) {
+    .changepwd-Width-Layout {
+        width: 80%;
+    }
+}
+@media (min-width: 401px) and (max-width: 500px) {
+    .changepwd-Width-Layout {
+        width: 80%;
+    }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+    .changepwd-Width-Layout {
+        width: 80%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    .changepwd-Width-Layout {
+        width: 80%;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1200px) {
+    .changepwd-Width-Layout {
+        width: 80%;
+    }
+}
