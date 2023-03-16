@@ -22,9 +22,25 @@
     box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
 }
 
+#frmProductInfo label
+{
+    color:white;
+}
 /*--------------------------------------------------------------
 # Progressloader
 --------------------------------------------------------------*/
+.progressloader-login {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/admin_assets/img/loader.gif") top center;
+    background-repeat: no-repeat;
+}
+
 .progressloader {
     position: absolute;
     top: 25%;

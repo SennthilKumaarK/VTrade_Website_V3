@@ -9,6 +9,7 @@
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="~/admin_assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/admin_assets/css/common.css" rel="stylesheet">
     <link href="~/admin_assets/img/favicon.png" rel="icon">
 
 
@@ -48,7 +49,8 @@
                                             Submit
                                         </button>
                                     </div>
-
+                                    <div id="Login_loader" class="progressloader-login" style="display:none;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +100,7 @@
             }
 
 
+            $('#Login_loader').show();
 
             var CheckLoginStatus = '@Url.Action("CheckLoginStatus", "AdminConsole")';
             var User_Name = $('#txtUsername').val();
@@ -110,6 +113,7 @@
                     data: { "User_Name": User_Name, "User_Password": User_Password },
                     success: function (result) {
                         //console.log(result);
+                        $('#Login_loader').hide();
 
                             if (result.ResponseSuccess == true) {
                                 window.location.href = '/AdminConsole/Dashboard';

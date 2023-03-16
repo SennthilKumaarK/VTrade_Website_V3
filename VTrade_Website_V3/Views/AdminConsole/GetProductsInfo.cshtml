@@ -31,38 +31,42 @@
                 {
                     foreach (var mItem in Model)
                     {
-                <tr>
-                    <td>
-                        @Html.ActionLink("Update", "UpdateProductInfo", new { ProductID = mItem.ID })
-                    </td>
-                    <td>
-                        @Html.ActionLink("View", "View", new { id = mItem.ID })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => mItem.CategoryName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => mItem.BrandName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => mItem.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => mItem.ProductDesc)
-                    </td>
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Update", "UpdateProductInfo", new { ProductID = mItem.ID })
+                            </td>
+                            <td>
+                                @Html.ActionLink("View", "View", new { id = mItem.ID })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.CategoryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.BrandName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => mItem.ProductDesc)
+                            </td>
 
-                </tr>
+                        </tr>
                     }
                 }
             </tbody>
         </table>
     </div>
+    <div id="Product_loader" class="progressloader" style="display:none;">
+    </div>
 </div>
-
-
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("body").on("click", "#tblProductsInfoGrid td a", function () {
+            $('#Product_loader').show();
+        });
+
         $("#tblProductsInfoGrid").DataTable(
             {
                 searching: true,
@@ -72,4 +76,3 @@
         );
     });
 </script>
-
