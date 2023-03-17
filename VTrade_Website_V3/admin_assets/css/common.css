@@ -1,4 +1,10 @@
-﻿.buttonSubmit {
+﻿hgroup {
+    padding: 5% 15% 15% 15%;
+    color: red;
+    text-align:left;
+}
+
+.buttonSubmit {
     padding: 10px 30px;
     color: #fff;
     font-weight: 400;
@@ -49,6 +55,18 @@
     z-index: 9999;
     overflow: hidden;
     background: url("/admin_assets/img/loader.gif") top center;
+    background-repeat: no-repeat;
+}
+
+.errorloader {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/admin_assets/img/errorloader.gif") top center;
     background-repeat: no-repeat;
 }
 

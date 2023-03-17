@@ -1,4 +1,4 @@
-﻿
+﻿@using VTrade_Website_V3.Attributes
 @model IEnumerable<DAL.Models.ProductListInfo>
 
 <div class="card-body">
@@ -33,10 +33,10 @@
                     {
                         <tr>
                             <td>
-                                @Html.ActionLink("Update", "UpdateProductInfo", new { ProductID = mItem.ID })
+                                @Html.EncodedActionLink("Update", "UpdateProductInfo", "AdminConsole", new { ProductID = mItem.ID }, null)
                             </td>
                             <td>
-                                @Html.ActionLink("View", "ViewProductInfo", new { ProductID = mItem.ID })
+                                @Html.EncodedActionLink("View", "ViewProductInfo", "AdminConsole", new { ProductID = mItem.ID }, null)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => mItem.CategoryName)

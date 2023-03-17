@@ -353,6 +353,7 @@ namespace VTrade_Website_V3.Controllers
         }
 
         [UserSessionAttribute]
+        [EncryptedActionParameter]
         public ActionResult UpdateProductInfo(int ProductID)
         {
             Methods Repobj = new Methods();
@@ -428,6 +429,7 @@ namespace VTrade_Website_V3.Controllers
         }
 
         [UserSessionAttribute]
+        [EncryptedActionParameter]
         public ActionResult ViewProductInfo(int ProductID)
         {
             Methods Repobj = new Methods();

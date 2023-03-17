@@ -120,6 +120,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\EncryptedActionParameterAttribute.cs" />
+    <Compile Include="Attributes\MyExtensions.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AdminConsoleController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
@@ -149,6 +151,7 @@
     <Content Include="admin_assets\css\sb-admin-2.css" />
     <Content Include="admin_assets\css\sb-admin-2.min.css" />
     <Content Include="admin_assets\img\admin-user.jfif" />
+    <Content Include="admin_assets\img\errorloader.gif" />
     <Content Include="admin_assets\img\favicon.png" />
     <Content Include="admin_assets\img\loader-old.gif" />
     <Content Include="admin_assets\img\loader-old2.gif" />
