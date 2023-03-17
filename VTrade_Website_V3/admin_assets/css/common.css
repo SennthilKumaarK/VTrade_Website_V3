@@ -22,9 +22,8 @@
     box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
 }
 
-#frmProductInfo label
-{
-    color:white;
+#frmProductInfo label, #frmViewProductInfo label {
+    color: white;
 }
 /*--------------------------------------------------------------
 # Progressloader
@@ -77,8 +76,7 @@
     background-repeat: no-repeat;
 }
 
-.dropdown-list
-{
+.dropdown-list {
     color: #fff;
     font-size: 14px;
     padding: 5px 5px;
@@ -92,8 +90,7 @@
     border: none;
 }
 
-.dropdown-list-product
-{
+.dropdown-list-product {
     color: #fff;
     font-size: 14px;
     padding: 5px 5px;
@@ -107,68 +104,65 @@
     border: none;
 }
 
-.ProdInfo-element
-{
-    height:600px;
-    overflow-y:scroll;
-    }
+.ProdInfo-element {
+    height: 600px;
+    overflow-y: scroll;
+}
 
-.box1 span, .box2 span, .box3 span, .box4 span, .box5 span, .box6 span, .box7 span, .box8 span, .box9 span, .box10 span, .box11 span, .box12 span
-{
+.box1 span, .box2 span, .box3 span, .box4 span, .box5 span, .box6 span, .box7 span, .box8 span, .box9 span, .box10 span, .box11 span, .box12 span {
     color: aliceblue;
 }
 
-.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9, .box10, .box11, .box12
-{
+.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9, .box10, .box11, .box12 {
     border-radius: 5px;
     padding: 5px;
 }
-.box1
-{
+
+.box1 {
     background-color: #DB6F5C;
 }
-.box2
-{
+
+.box2 {
     background-color: #8A83D7;
 }
-.box3
-{
+
+.box3 {
     background-color: #83D7D0;
 }
-.box4
-{
+
+.box4 {
     background-color: #D7C983;
 }
-.box5
-{
+
+.box5 {
     background-color: #4CCDA6;
 }
-.box6
-{
+
+.box6 {
     background-color: #DB83AF;
 }
-.box7
-{
+
+.box7 {
     background-color: #77777F;
 }
-.box8
-{
+
+.box8 {
     background-color: #E6E47F;
 }
-.box9
-{
+
+.box9 {
     background-color: #5795C9;
 }
-.box10
-{
+
+.box10 {
     background-color: #57C97D;
 }
-.box11
-{
+
+.box11 {
     background-color: #B4BCAF;
 }
-.box12
-{
+
+.box12 {
     background-color: #C9A357;
 }
 
@@ -181,6 +175,7 @@
         width: 80%;
     }
 }
+
 @media (min-width: 401px) and (max-width: 500px) {
     .changepwd-Width-Layout {
         width: 80%;
