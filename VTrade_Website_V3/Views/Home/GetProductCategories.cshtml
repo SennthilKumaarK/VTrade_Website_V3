@@ -1,0 +1,15 @@
+﻿@using VTrade_Website_V3.Attributes
+@model IEnumerable<DAL.CategoryItem>
+
+@if (Model != null)
+{
+    foreach (var mItem in Model)
+    {
+<div class='col-lg-4 col-md-6 portfolio-item portfolio-item-index'>
+    @Html.EncodedImageActionLink(mItem.CategoryImgPath, "Index", "Product", new { CategoryID = mItem.ID }, null)
+    <div class='portfolio-info'>
+        @Html.EncodedActionLink(mItem.CategoryName, "Index", "Product", new { CategoryID = mItem.ID }, null)
+    </div>
+</div>
+    }
+}

@@ -18,50 +18,23 @@ namespace VTrade_Website_V3.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetProductCategories()
+        public ActionResult GetProductCategories()
         {
-            ResponseData res = new ResponseData();
+            Methods Repobj = new Methods();
+            List<CategoryItem> lstObj = new List<CategoryItem>();
 
-            try
+            _getCategoryItems _getCategoryItemsObj = new _getCategoryItems();
+            _getCategoryItemsObj = Repobj.getCategoryItems();
+
+            if (_getCategoryItemsObj.ResponseStatus == true)
             {
-                Methods Repobj = new Methods();
-                _getCategoryItems _getCategoryItemsObj = new _getCategoryItems();
-                _getCategoryItemsObj = Repobj.getCategoryItems();
-
-                if (_getCategoryItemsObj.ResponseStatus == true)
+                if (_getCategoryItemsObj.lstCategoryItem != null)
                 {
-                    List<CategoryItem> lstObj = new List<CategoryItem>();
                     lstObj = _getCategoryItemsObj.lstCategoryItem;
-                    string str_responseData = "";
-
-                    if (lstObj != null)
-                    {
-                        foreach (CategoryItem varCategoryListItem in lstObj)
-                        {
-                            str_responseData += "<div class='col-lg-4 col-md-6 portfolio-item portfolio-item-index'> <a href='/Product?CategoryID=" + varCategoryListItem.ID + "'><img src='" + varCategoryListItem.CategoryImgPath + "' class='imgProduct' alt=''/></a>";
-                            str_responseData += "<div class='portfolio-info'><a href='/product?CategoryID=" + varCategoryListItem.ID + "'>";
-                            str_responseData += varCategoryListItem.CategoryName;
-                            str_responseData += "</a></div>";
-                            str_responseData += "</div>";
-                        }
-                    }
-
-                    res.ResponseSuccess = true;
-                    res.ResponseMessage = str_responseData;
-                }
-                else
-                {
-                    res.ResponseSuccess = false;
-                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
                 }
             }
-            catch (Exception)
-            {
-                res.ResponseSuccess = false;
-                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
-            }
 
-            return Json(res, JsonRequestBehavior.AllowGet);
+            return PartialView("GetProductCategories", lstObj);
 
         }
 

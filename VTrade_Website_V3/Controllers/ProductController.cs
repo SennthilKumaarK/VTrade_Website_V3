@@ -7,13 +7,15 @@ using DAL;
 using VTrade_Website_V3.Models;
 using DAL.Repository;
 using DAL.Models;
+using VTrade_Website_V3.Attributes;
 
 namespace VTrade_Website_V3.Controllers
 {
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(string CategoryID, string BrandID)
+        [EncryptedActionParameter]
+        public ActionResult Index(int? CategoryID, int? BrandID)
         {
             GetCategoryItems(CategoryID);
             GetBrandItems(BrandID);
@@ -21,7 +23,7 @@ namespace VTrade_Website_V3.Controllers
             return View();
         }
 
-        private void GetCategoryItems(string CategoryID)
+        private void GetCategoryItems(int? CategoryID)
         {
 
             Methods Repobj = new Methods();
@@ -34,9 +36,8 @@ namespace VTrade_Website_V3.Controllers
 
                 if (_getCategoryItemsObj.ResponseStatus == true)
                 {
-                    if ((CategoryID != null) && (CategoryID != "0"))
+                    if ((CategoryID != null) && (CategoryID > 0))
                     {
-
                         CategoryItemList.Add(new SelectListItem
                         {
                             Value = "0",
@@ -45,7 +46,7 @@ namespace VTrade_Website_V3.Controllers
 
                         foreach (var element in _getCategoryItemsObj.lstCategoryItem)
                         {
-                            if (element.ID.ToString() == CategoryID)
+                            if (element.ID == CategoryID)
                             {
                                 CategoryItemList.Add(new SelectListItem
                                 {
@@ -91,7 +92,7 @@ namespace VTrade_Website_V3.Controllers
             ViewData["CategoryListItems"] = CategoryItemList;
         }
 
-        private void GetBrandItems(string BrandID)
+        private void GetBrandItems(int? BrandID)
         {
 
             Methods Repobj = new Methods();
@@ -104,7 +105,7 @@ namespace VTrade_Website_V3.Controllers
 
                 if (_getBrandItemsObj.ResponseStatus == true)
                 {
-                    if ((BrandID != null) && (BrandID != "0"))
+                    if ((BrandID != null) && (BrandID > 0))
                     {
                         BrandItemList.Add(new SelectListItem
                         {
@@ -114,7 +115,7 @@ namespace VTrade_Website_V3.Controllers
 
                         foreach (var element in _getBrandItemsObj.lstBrandItem)
                         {
-                            if (element.ID.ToString() == BrandID)
+                            if (element.ID == BrandID)
                             {
                                 BrandItemList.Add(new SelectListItem
                                 {

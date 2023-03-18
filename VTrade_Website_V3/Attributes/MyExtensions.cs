@@ -38,7 +38,6 @@ namespace VTrade_Website_V3.Attributes
                 }
             }
 
-            //<a href="/Answer?questionId=14">What is Entity Framework??</a>
             StringBuilder ancor = new StringBuilder();
             ancor.Append("<a ");
             if (htmlAttributesString != string.Empty)
@@ -65,6 +64,64 @@ namespace VTrade_Website_V3.Attributes
             ancor.Append("</a>");
             return new MvcHtmlString(ancor.ToString());
         }
+
+        public static MvcHtmlString EncodedImageActionLink(this HtmlHelper htmlHelper, string imageSrc, string actionName, string controllerName, object routeValues, object htmlAttributes)
+        {
+            string queryString = string.Empty;
+            string htmlAttributesString = string.Empty;
+            if (routeValues != null)
+            {
+                RouteValueDictionary d = new RouteValueDictionary(routeValues);
+                for (int i = 0; i < d.Keys.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        queryString += "?";
+                    }
+                    queryString += d.Keys.ElementAt(i) + "=" + d.Values.ElementAt(i);
+                }
+            }
+
+            if (htmlAttributes != null)
+            {
+                RouteValueDictionary d = new RouteValueDictionary(htmlAttributes);
+                for (int i = 0; i < d.Keys.Count; i++)
+                {
+                    htmlAttributesString += " " + d.Keys.ElementAt(i) + "=" + d.Values.ElementAt(i);
+                }
+            }
+
+            if (imageSrc != null)
+            {
+                imageSrc = "<img src='" + imageSrc + "' class='imgProduct' alt=''/>";
+            }
+            StringBuilder ancor = new StringBuilder();
+            ancor.Append("<a ");
+            if (htmlAttributesString != string.Empty)
+            {
+                ancor.Append(htmlAttributesString);
+            }
+            ancor.Append(" href='");
+            if (controllerName != string.Empty)
+            {
+                ancor.Append("/" + controllerName);
+            }
+
+            if (actionName != "Index")
+            {
+                ancor.Append("/" + actionName);
+            }
+            if (queryString != string.Empty)
+            {
+                ancor.Append("?q=" + Encrypt(queryString));
+            }
+            ancor.Append("'");
+            ancor.Append(">");
+            ancor.Append(imageSrc);
+            ancor.Append("</a>");
+            return new MvcHtmlString(ancor.ToString());
+        }
+
 
         private static string Encrypt(string plainText)
         {

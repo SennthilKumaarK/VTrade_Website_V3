@@ -92,27 +92,7 @@
     });
 
     function GetCategoryItems() {
-
-        var getCategoryItemsURL = '@Url.Action("GetProductCategories", "Home")';
-
-        $.ajax(
-            {
-                type: 'GET',
-                url: getCategoryItemsURL,
-                data: {},
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    //console.log(result);
-                    if (result.ResponseSuccess == true) {
-                        //alert('success');
-                        $('#lstCategoryItems').html(result.ResponseMessage);
-                    }
-                    else {
-                        //alert(result.ResponseMessage);
-                    }
-                },
-            });
+        $("#lstCategoryItems").load("/Home/GetProductCategories");
     }
 
      function GetProductItems() {
