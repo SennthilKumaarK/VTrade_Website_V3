@@ -65,7 +65,7 @@ namespace VTrade_Website_V3.Attributes
             return new MvcHtmlString(ancor.ToString());
         }
 
-        public static MvcHtmlString EncodedImageActionLink(this HtmlHelper htmlHelper, string imageSrc, string actionName, string controllerName, object routeValues, object htmlAttributes)
+        public static MvcHtmlString EncodedInnerHtmlActionLink(this HtmlHelper htmlHelper, string innerHtmlSrc, string actionName, string controllerName, object routeValues, object htmlAttributes)
         {
             string queryString = string.Empty;
             string htmlAttributesString = string.Empty;
@@ -90,11 +90,7 @@ namespace VTrade_Website_V3.Attributes
                     htmlAttributesString += " " + d.Keys.ElementAt(i) + "=" + d.Values.ElementAt(i);
                 }
             }
-
-            if (imageSrc != null)
-            {
-                imageSrc = "<img src='" + imageSrc + "' class='imgProduct' alt=''/>";
-            }
+            
             StringBuilder ancor = new StringBuilder();
             ancor.Append("<a ");
             if (htmlAttributesString != string.Empty)
@@ -117,7 +113,7 @@ namespace VTrade_Website_V3.Attributes
             }
             ancor.Append("'");
             ancor.Append(">");
-            ancor.Append(imageSrc);
+            ancor.Append(innerHtmlSrc);
             ancor.Append("</a>");
             return new MvcHtmlString(ancor.ToString());
         }

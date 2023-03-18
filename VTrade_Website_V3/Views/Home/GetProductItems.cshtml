@@ -1,0 +1,16 @@
+﻿@using VTrade_Website_V3.Attributes
+@model IEnumerable<DAL.Models.ProductListInfo>
+
+@if (Model != null)
+{
+    foreach (var mItem in Model)
+    {
+        <div class='col-lg-4 col-md-6 portfolio-item'>
+            @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.ProductImgPath + "' class='img-Product' alt=''/>", "ProductDetail", "Product", new { ProductID = mItem.ID }, null)
+            <div class='portfolio-info'>
+                @Html.EncodedInnerHtmlActionLink("<h4>" + mItem.ProductName + "</h4><p>" + mItem.BrandName + "</p><span class='details-link'>" + mItem.CategoryName + "</span>", "ProductDetail", "Product", new { ProductID = mItem.ID }, null)
+            </div>
+        </div>
+       
+    }
+}

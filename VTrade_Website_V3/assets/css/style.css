@@ -47,6 +47,19 @@ h6 {
     background-repeat: no-repeat;
 }
 
+.progressloader-Home {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: url("/assets/img/loader_home.gif") top center;
+    background-repeat: no-repeat;
+    height: 200px;
+}
+
 .progressloader-relative {
     position: relative;
     top: 0;
@@ -2654,7 +2667,7 @@ section {
 .products-bg {
     background: url("/assets/img/product-bg.jpg?v=1") top left;
     background-size: cover;
-    min-height: 750px;
+/*    min-height: 750px;*/
     display: block;
     position: relative;
     width: 100%;

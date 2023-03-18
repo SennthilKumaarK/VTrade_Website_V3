@@ -56,6 +56,8 @@
         </div>
         <div class="row" id="lstCategoryItems">
         </div>
+        <div id="categoryitems_loader" class="progressloader-Home" style="display:none;">
+        </div>
     </div>
 
 </section>
@@ -79,6 +81,8 @@
         </div>
         <div class="row" data-aos="fade-up" data-aos-delay="200" id="lstProductItems">
         </div>
+        <div id="productitems_loader" class="progressloader-Home" style="display:none;">
+        </div>
     </div>
 </section>
 <!-- End Product Section -->
@@ -87,35 +91,33 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        GetCategoryItems();
-        GetProductItems();
+
+        $("#lstProductItems").hide();
+        $("#lstCategoryItems").hide();
+
+        $('#productitems_loader').show();
+        $('#categoryitems_loader').show();
+
+        setTimeout(function () {
+
+            GetCategoryItems();
+            $('#categoryitems_loader').hide();
+            $("#lstCategoryItems").show();
+            
+
+            GetProductItems();
+            $('#productitems_loader').hide();
+            $("#lstProductItems").show();
+            
+
+        }, 5000);
     });
 
     function GetCategoryItems() {
         $("#lstCategoryItems").load("/Home/GetProductCategories");
     }
 
-     function GetProductItems() {
-
-        var getProductItemsURL = '@Url.Action("GetProductItems", "Home")';
-
-        $.ajax(
-            {
-                type: 'GET',
-                url: getProductItemsURL,
-                data: {},
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    //console.log(result);
-                    if (result.ResponseSuccess == true) {
-                        //alert('success');
-                        $('#lstProductItems').html(result.ResponseMessage);
-                    }
-                    else {
-                        //alert('fail');
-                    }
-                },
-            });
+    function GetProductItems() {
+        $("#lstProductItems").load("/Home/GetProductItems");
     }
 </script>

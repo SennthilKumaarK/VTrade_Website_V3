@@ -188,7 +188,8 @@ namespace VTrade_Website_V3.Controllers
             ViewData["SortListItems"] = SortItemList;
         }
 
-        public ActionResult ProductDetail(string ProductID)
+        [EncryptedActionParameter]
+        public ActionResult ProductDetail(int ProductID)
         {
             ViewData["ProductID"] = ProductID;
             return View();
