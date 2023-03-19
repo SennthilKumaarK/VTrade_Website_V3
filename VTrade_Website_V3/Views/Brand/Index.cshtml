@@ -41,10 +41,10 @@
         $('#brand_loader').show();
         
         setTimeout(function () {
-
+            
+            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=1");
             $('#brand_loader').hide();
             $("#divTable_BrandItem").show();
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=1");
 
         }, 2000);
     });
@@ -57,10 +57,10 @@
         $('#brand_loader').show();
 
         setTimeout(function () {
-
+            
+            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
             $('#brand_loader').hide();
             $("#divTable_BrandItem").show();
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
 
         }, 2000);
     }
@@ -74,9 +74,9 @@
 
         setTimeout(function () {
 
+            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
             $('#brand_loader').hide();
             $("#divTable_BrandItem").show();
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
 
         }, 2000);
     }
