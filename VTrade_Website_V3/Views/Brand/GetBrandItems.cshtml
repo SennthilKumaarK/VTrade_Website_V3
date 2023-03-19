@@ -1,0 +1,40 @@
+﻿@using VTrade_Website_V3.Attributes
+@model VTrade_Website_V3.Models.BrandListResponseData
+
+@if (Model != null)
+{
+    <div class="col-lg-12  col-sm-12 col-xs-12" style="text-align: left; padding-left: 20px; padding-top: 65px; padding-bottom: 65px;">
+        @{
+            int pageCurrent = Model.PageNO;
+            int numSize = Model.NumSize;
+
+                <label id="lblTopPagination" class="lblPagination">@Model.PageDesc&nbsp;&nbsp;</label>
+            if (pageCurrent > 1)
+            {
+                <button type="button" id="btnPreviousTop" class="buttonSubmit" onclick="btnPrevActionClick(@pageCurrent);">
+                    < &nbsp;&nbsp; Previous
+                </button>
+            }
+            if (pageCurrent > 0 && pageCurrent < numSize)
+            {
+                <button type="button" id="btnNextTop" class="buttonSubmit" onclick="btnNextActionClick(@pageCurrent);">
+                    Next &nbsp;&nbsp;>
+                </button>
+            }
+        }
+    </div>
+
+    <div class="row" data-aos="fade-up" data-aos-delay="200">
+        @foreach (var mItem in Model.lstBrandItem)
+        {
+            <div class='col-lg-4 col-md-6 Brand-item'>
+
+                @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.BrandImgPath + "' class='img-Brand' alt=''/>", "Index", "Product", new { BrandID = mItem.ID }, null)
+                <div class='Brand-info'>
+                    @Html.EncodedInnerHtmlActionLink("<h4>" + mItem.BrandName + "</h4>", "ProductDetail", "Product", new { BrandID = mItem.ID }, null)
+                </div>
+            </div>
+        }
+    </div>
+}
+

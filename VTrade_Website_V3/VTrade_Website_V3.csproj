@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Attributes\UserSessionAttribute.cs" />
     <Compile Include="Models\AdditionalListResponseData.cs" />
+    <Compile Include="Models\BrandListResponseData.cs" />
     <Compile Include="Models\ChkUserResponseData.cs" />
     <Compile Include="Models\ProductInfoResponseData.cs" />
     <Compile Include="Models\ResponseChartData.cs" />
@@ -2294,6 +2295,7 @@
     <Content Include="Views\AdminConsole\ViewProductInfo.cshtml" />
     <Content Include="Views\Home\GetProductCategories.cshtml" />
     <Content Include="Views\Home\GetProductItems.cshtml" />
+    <Content Include="Views\Brand\GetBrandItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
