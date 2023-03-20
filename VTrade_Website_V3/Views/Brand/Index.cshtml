@@ -21,12 +21,20 @@
     <div class="container">
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="Brand">
-            <div id="brand_loader" class="container" data-aos="fade-up" style="display: none;height: 150px;">
-                <div class="progressloader" style="">
+            <div class="container" data-aos="fade-up">
+                <div class="col-lg-12  col-sm-12 col-xs-12" style="text-align: left; padding-left: 20px; padding-top: 65px; padding-bottom: 65px;">
+                    <label id="lblTopPagination" class="lblPagination"></label>&nbsp;&nbsp;
+                    <button type="button" id="btnPreviousTop" class="buttonSubmit" style="display:none;" onclick="btnPrevActionClick();">
+                        < &nbsp;&nbsp; Previous
+                    </button>
+                    <button type="button" id="btnNextTop" class="buttonSubmit" style="display:none;" onclick="btnNextActionClick();">
+                        Next &nbsp;&nbsp;>
+                    </button>
                 </div>
-            </div>
-            <div class="container" data-aos="fade-up" id="divTable_BrandItem">
-                <div id="innerHtml_BrandItem"></div>
+                <div class="row" data-aos="fade-up" data-aos-delay="200" id="divTable_BrandItem">
+                </div>
+                <div id="brand_loader" class="progressloader" style="display:none;">
+                </div>
             </div>
         </section>
         <!-- End Portfolio Section -->
@@ -39,45 +47,14 @@
 
         $("#divTable_BrandItem").hide();
         $('#brand_loader').show();
-        
+
         setTimeout(function () {
-            
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=1");
+
+            $("#divTable_BrandItem").load("/Brand/GetBrandItems?pageno=1");
             $('#brand_loader').hide();
             $("#divTable_BrandItem").show();
 
         }, 2000);
     });
 
-    function btnPrevActionClick(PageNO) {
-
-        var newPageNo = parseInt(PageNO) - parseInt(1);
-
-        $("#divTable_BrandItem").hide();
-        $('#brand_loader').show();
-
-        setTimeout(function () {
-            
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
-            $('#brand_loader').hide();
-            $("#divTable_BrandItem").show();
-
-        }, 2000);
-    }
-
-    function btnNextActionClick(PageNO) {
-
-        var newPageNo = parseInt(PageNO) + parseInt(1);
-
-        $("#divTable_BrandItem").hide();
-        $('#brand_loader').show();
-
-        setTimeout(function () {
-
-            $("#innerHtml_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
-            $('#brand_loader').hide();
-            $("#divTable_BrandItem").show();
-
-        }, 2000);
-    }
 </script>

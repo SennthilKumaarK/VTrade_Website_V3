@@ -3,38 +3,72 @@
 
 @if (Model != null)
 {
-    <div class="col-lg-12  col-sm-12 col-xs-12" style="text-align: left; padding-left: 20px; padding-top: 65px; padding-bottom: 65px;">
-        @{
-            int pageCurrent = Model.PageNO;
-            int numSize = Model.NumSize;
+    {
+        int pageCurrent = Model.PageNO;
+        int numSize = Model.NumSize;
 
-                <label id="lblTopPagination" class="lblPagination">@Model.PageDesc&nbsp;&nbsp;</label>
-            if (pageCurrent > 1)
-            {
-                <button type="button" id="btnPreviousTop" class="buttonSubmit" onclick="btnPrevActionClick(@pageCurrent);">
-                    < &nbsp;&nbsp; Previous
-                </button>
-            }
-            if (pageCurrent > 0 && pageCurrent < numSize)
-            {
-                <button type="button" id="btnNextTop" class="buttonSubmit" onclick="btnNextActionClick(@pageCurrent);">
-                    Next &nbsp;&nbsp;>
-                </button>
-            }
-        }
-    </div>
+        <script type="text/javascript">
+            $('#lblTopPagination').html("@Model.PageDesc");
+            $('#btnPreviousTop').css('display', 'none');
+            $('#btnNextTop').css('display', 'none');
 
-    <div class="row" data-aos="fade-up" data-aos-delay="200">
-        @foreach (var mItem in Model.lstBrandItem)
+        </script>
+
+        if (pageCurrent > 1)
         {
-            <div class='col-lg-4 col-md-6 Brand-item'>
+            <script type="text/javascript">
+                $('#btnPreviousTop').css('display', 'inline');
 
-                @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.BrandImgPath + "' class='img-Brand' alt=''/>", "Index", "Product", new { BrandID = mItem.ID }, null)
-                <div class='Brand-info'>
-                    @Html.EncodedInnerHtmlActionLink("<h4>" + mItem.BrandName + "</h4>", "ProductDetail", "Product", new { BrandID = mItem.ID }, null)
-                </div>
-            </div>
+                    function btnPrevActionClick()
+                    {
+                        var PageNO = "@Model.PageNO";
+                        var newPageNo = parseInt(PageNO) - parseInt(1);
+
+                        $("#divTable_BrandItem").hide();
+                        $('#brand_loader').show();
+
+                        setTimeout(function () {
+
+                            $("#divTable_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
+                            $('#brand_loader').hide();
+                            $("#divTable_BrandItem").show();
+                            }, 2000);
+                        }
+            </script>
         }
-    </div>
+        if (pageCurrent > 0 && pageCurrent < numSize)
+        {
+            <script type="text/javascript">
+                $('#btnNextTop').css('display', 'inline');
+
+                    function btnNextActionClick() {
+
+                        var PageNO = "@Model.PageNO";
+                        var newPageNo = parseInt(PageNO) + parseInt(1);
+
+                        $("#divTable_BrandItem").hide();
+                        $('#brand_loader').show();
+
+                        setTimeout(function () {
+
+                            $("#divTable_BrandItem").load("/Brand/GetBrandItems?pageno=" + parseInt(newPageNo));
+                            $('#brand_loader').hide();
+                            $("#divTable_BrandItem").show();
+                        }, 2000);
+                    }
+            </script>
+        }
+    }
+
+    foreach (var mItem in Model.lstBrandItem)
+    {
+        <div class='col-lg-4 col-md-6 Brand-item'>
+
+            @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.BrandImgPath + "' class='img-Brand' alt=''/>", "Index", "Product", new { BrandID = mItem.ID }, null)
+            <div class='Brand-info'>
+                @Html.EncodedInnerHtmlActionLink("<h4>" + mItem.BrandName + "</h4>", "ProductDetail", "Product", new { BrandID = mItem.ID }, null)
+            </div>
+        </div>
+    }
 }
 
