@@ -137,6 +137,7 @@
     <Compile Include="Models\BrandListResponseData.cs" />
     <Compile Include="Models\ChkUserResponseData.cs" />
     <Compile Include="Models\ProductInfoResponseData.cs" />
+    <Compile Include="Models\ProductListResponseData.cs" />
     <Compile Include="Models\ResponseChartData.cs" />
     <Compile Include="Models\ResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2296,6 +2297,7 @@
     <Content Include="Views\Home\GetProductCategories.cshtml" />
     <Content Include="Views\Home\GetProductItems.cshtml" />
     <Content Include="Views\Brand\GetBrandItems.cshtml" />
+    <Content Include="Views\Product\GetProductListItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

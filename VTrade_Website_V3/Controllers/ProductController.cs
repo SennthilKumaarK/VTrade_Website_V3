@@ -196,74 +196,49 @@ namespace VTrade_Website_V3.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetProductListItems(ProductFilter _ProductFilter)
+        public PartialViewResult GetProductListItems(ProductFilter _ProductFilter)
         {
-            AdditionalListResponseData res = new AdditionalListResponseData();
-            try
+            ProductListResponseData res = new ProductListResponseData();
+            Methods Repobj = new Methods();
+            List<ProductListInfo> lstObj = new List<ProductListInfo>();
+
+            _getProductListItems _getProductListItemsObj = new _getProductListItems();
+            _getProductListItemsObj = Repobj.getProductListItems(_ProductFilter, 6);
+
+            if (_getProductListItemsObj.ResponseStatus == true)
             {
-
-                Methods Repobj = new Methods();
-                _getProductListItems _getProductListItemsObj = new _getProductListItems();
-                _getProductListItemsObj = Repobj.getProductListItems(_ProductFilter, 6);
-
-                if (_getProductListItemsObj.ResponseStatus == true)
+                if (_getProductListItemsObj.lstProductItem != null)
                 {
-                    List<ProductListInfo> lstObj = new List<ProductListInfo>();
                     lstObj = _getProductListItemsObj.lstProductItem;
-                    string str_responseData = "";
+                }
+            }
 
-                    if (lstObj != null)
-                    {
-                        foreach (ProductListInfo varProductListItem in lstObj)
-                        {
-                            str_responseData += "<div class='col-lg-4 col-md-6 portfolio-item'> <a href='/Product/ProductDetail?ProductID=" + varProductListItem.ID + "'><img src='" + varProductListItem.ProductImgPath + "' class='img-Product' alt=''/></a>";
-                            str_responseData += "<div class='portfolio-info'><a href='/Product/ProductDetail?ProductID=" + varProductListItem.ID + "'>";
-                            str_responseData += "<h4>" + varProductListItem.ProductName + "</h4>";
-                            str_responseData += "<p>" + varProductListItem.BrandName + "</p><span class='details-link'>" + varProductListItem.CategoryName + "</span>";
-                            str_responseData += "</a></div>";
-                            str_responseData += "</div>";
-                        }
-                    }
+            res.lstProductItem = lstObj;
+            res.PageNO = _getProductListItemsObj.PageNO;
+            res.NumSize = _getProductListItemsObj.numSize;
 
-                    res.ResponseSuccess = true;
-                    res.ResponseMessage = str_responseData;
-                    res.PageNO = _getProductListItemsObj.PageNO;
-                    res.NumSize = _getProductListItemsObj.numSize;
-                    int StartPg = _getProductListItemsObj.StartPg;
-                    int TotalPg = _getProductListItemsObj.TotalPg;
+            if (lstObj.Count > 0)
+            {
+                int StartPg = _getProductListItemsObj.StartPg;
+                int TotalPg = _getProductListItemsObj.TotalPg;
+                int StartCount = (StartPg + 1);
+                int EndCount = (StartPg + lstObj.Count);
 
-                    if (lstObj.Count() > 0)
-                    {
-                        int StartCount = (StartPg + 1);
-                        int EndCount = (StartPg + lstObj.Count());
-
-                        if (EndCount > StartCount)
-                        {
-                            res.ResponseMessage2 = "Showing results of " + StartCount + " - " + EndCount + " out of " + TotalPg + " products";
-                        }
-                        else
-                        {
-                            res.ResponseMessage2 = "Showing results of " + StartCount + " out of " + TotalPg + " products";
-                        }
-                    }
-                    else
-                    {
-                        res.ResponseMessage2 = "Showing results 0 products";
-                    }
+                if (EndCount > StartCount)
+                {
+                    res.PageDesc = "Showing results of " + StartCount + " - " + EndCount + " out of " + TotalPg + " products";
                 }
                 else
                 {
-                    res.ResponseSuccess = false;
-                    res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                    res.PageDesc = "Showing results of " + StartCount + " out of " + TotalPg + " products";
                 }
             }
-            catch (Exception ex)
+            else
             {
-                res.ResponseSuccess = false;
-                res.ResponseMessage = "The server has encountered an unexpected internal error. Please try again later.";
+                res.PageDesc = "Showing results 0 products";
             }
 
-            return Json(res, JsonRequestBehavior.AllowGet);
+            return PartialView("GetProductListItems", res);
 
         }
 

@@ -1,0 +1,82 @@
+﻿@using VTrade_Website_V3.Attributes
+@model VTrade_Website_V3.Models.ProductListResponseData
+
+@if (Model != null)
+{
+    {
+        int pageCurrent = Model.PageNO;
+        int numSize = Model.NumSize;
+
+        <script type="text/javascript">
+            $('#lblTopPagination').html("@Model.PageDesc");
+            $('#btnPreviousTop').css('display', 'none');
+            $('#btnNextTop').css('display', 'none');
+
+        </script>
+
+        if (pageCurrent > 1)
+        {
+            <script type="text/javascript">
+                $('#btnPreviousTop').css('display', 'inline');
+
+                    function btnPrevActionClick()
+                    {
+                        var PageNO = "@Model.PageNO";
+                        var newPageNo = parseInt(PageNO) - parseInt(1);
+
+                        $("#divTable_ProductItem").hide();
+                        $('#product_loader').show();
+
+                        setTimeout(function () {
+
+                            var Category_ID = $("#ddlCategoryItems option:selected").val();
+                            var Brand_ID = $("#ddlBrandItems option:selected").val();
+                            var Sort_ID = $("#ddlSortBy option:selected").val();
+
+                            $("#divTable_ProductItem").load("/Product/GetProductListItems?CategoryID=" + Category_ID + "&BrandID=" + Brand_ID + "&SortID=" + Sort_ID + "&PageNO=" + parseInt(newPageNo));
+                            $('#product_loader').hide();
+                            $("#divTable_ProductItem").show();
+                            }, 2000);
+                        }
+            </script>
+        }
+        if (pageCurrent > 0 && pageCurrent < numSize)
+        {
+            <script type="text/javascript">
+                $('#btnNextTop').css('display', 'inline');
+
+                    function btnNextActionClick() {
+
+                        var PageNO = "@Model.PageNO";
+                        var newPageNo = parseInt(PageNO) + parseInt(1);
+
+                        $("#divTable_ProductItem").hide();
+                        $('#product_loader').show();
+
+                        setTimeout(function () {
+
+                            var Category_ID = $("#ddlCategoryItems option:selected").val();
+                            var Brand_ID = $("#ddlBrandItems option:selected").val();
+                            var Sort_ID = $("#ddlSortBy option:selected").val();
+
+                            $("#divTable_ProductItem").load("/Product/GetProductListItems?CategoryID=" + Category_ID + "&BrandID=" + Brand_ID + "&SortID=" + Sort_ID + "&PageNO=" + parseInt(newPageNo));
+                            $('#product_loader').hide();
+                            $("#divTable_ProductItem").show();
+                        }, 2000);
+                    }
+            </script>
+        }
+    }
+
+    foreach (var mItem in Model.lstProductItem)
+    {
+        <div class='col-lg-4 col-md-6 portfolio-item'>
+            @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.ProductImgPath + "' class='img-Product' alt=''/>", "ProductDetail", "Product", new { ProductID = mItem.ID }, null)
+            <div class='portfolio-info'>
+                @Html.EncodedInnerHtmlActionLink("<h4>" + mItem.ProductName + "</h4><p>" + mItem.BrandName + "</p><span class='details-link'>" + mItem.CategoryName + "</span>", "ProductDetail", "Product", new { ProductID = mItem.ID }, null)
+            </div>
+        </div>
+    }
+}
+
+

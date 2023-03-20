@@ -41,16 +41,15 @@
                     </div>
                 </div>
                 <div class="col-lg-12  col-sm-12 col-xs-12" style="text-align:left;padding-left: 20px;padding-bottom: 20px;">
-                    <label id="lblPageNO" style="visibility:hidden;"></label>
                     <label id="lblTopPagination" class="lblPagination"></label>&nbsp;&nbsp;
-                    <button type="button" id="btnPreviousTop" class="buttonSubmit">
+                    <button type="button" id="btnPreviousTop" class="buttonSubmit" style="display:none;" onclick="btnPrevActionClick();">
                         < &nbsp;&nbsp; Previous
                     </button>
-                    <button type="button" id="btnNextTop" class="buttonSubmit">
+                    <button type="button" id="btnNextTop" class="buttonSubmit" style="display:none;" onclick="btnNextActionClick();">
                         Next &nbsp;&nbsp;>
                     </button>
                 </div>
-                <div class="row" data-aos="fade-up" data-aos-delay="200" id="lstProductItems">
+                <div class="row" data-aos="fade-up" data-aos-delay="200" id="divTable_ProductItem">
                 </div>
                 <div id="product_loader" class="progressloader" style="display:none;">
                 </div>
@@ -66,81 +65,25 @@
     $(document).ready(function () {
         $('#btnPreviousTop').hide();
         $('#btnNextTop').hide();
-        GetProductItems(1);
+        GetProductItems();
     });
 
-    $(function () {
-        $('#btnNextTop').click(function () {
-            var _lblPageNO = $('#lblPageNO').text();
-            if (_lblPageNO != '') {
-                GetProductItems(parseInt(_lblPageNO) + parseInt(1));
-            }
-        });
+    function GetProductItems() {
 
-        $('#btnPreviousTop').click(function () {
-            var _lblPageNO = $('#lblPageNO').text();
-            if (_lblPageNO != '') {
-                GetProductItems(parseInt(_lblPageNO) - parseInt(1));
-            }
-        });
-    });
-
-
-    function GetProductItems(Page_NO) {
-
+        $("#divTable_ProductItem").hide();
         $('#product_loader').show();
-        $('#lstProductItems').hide();
 
-        var getProductItemsURL = '@Url.Action("GetProductListItems", "Product")';
-        var Category_ID = $("#ddlCategoryItems option:selected").val();
-        var Brand_ID = $("#ddlBrandItems option:selected").val();
-        var Sort_ID = $("#ddlSortBy option:selected").val();
+        setTimeout(function () {
 
-        $.ajax(
-            {
-                type: 'GET',
-                url: getProductItemsURL,
-                data: { "CategoryID": Category_ID, "BrandID": Brand_ID, "SortID": Sort_ID, "PageNO": Page_NO },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    //console.log(result);
+            var Category_ID = $("#ddlCategoryItems option:selected").val();
+            var Brand_ID = $("#ddlBrandItems option:selected").val();
+            var Sort_ID = $("#ddlSortBy option:selected").val();
 
-                    setTimeout(function () {
-                        $('#product_loader').hide();
-                        $('#lstProductItems').show();
+            $("#divTable_ProductItem").load("/Product/GetProductListItems?CategoryID=" + Category_ID + "&BrandID=" + Brand_ID + "&SortID=" + Sort_ID + "&PageNO=1");
+            $('#product_loader').hide();
+            $("#divTable_ProductItem").show();
 
-                    if (result.ResponseSuccess == true) {
-
-                        $('#btnPreviousTop').hide();
-                        $('#btnNextTop').hide();
-
-                        $('#lblPageNO').html(result.PageNO);
-                        $('#lblTopPagination').html(result.ResponseMessage2);
-
-                        $('#lstProductItems').html(result.ResponseMessage);
-
-                        if (result.PageNO != '') {
-                            var PageNO = result.PageNO;
-                             if (PageNO > 1) {
-                                 $('#btnPreviousTop').show();
-                             }
-                        }
-
-                        if ((result.PageNO != '') && (result.NumSize != '')) {
-                            var PageNO = result.PageNO;
-                            var NumSize = result.NumSize;
-                            if ((PageNO > 0) && (PageNO < NumSize)) {
-                                $('#btnNextTop').show();
-                            }
-                        }
-
-                    }
-                    else {
-                        //alert(result.ResponseMessage);
-                        }
-                    }, 2000);
-                },
-            });
+        }, 2000);
     }
+
 </script>
