@@ -1,4 +1,6 @@
-﻿<!-- ======= Breadcrumbs ======= -->
+﻿@model VTrade_Website_V3.Models.ProductInfoResponseData
+
+<!-- ======= Breadcrumbs ======= -->
 <section class="breadcrumbs breadcrumbs2 product">
     <div class="boxedeb">
         <div class="container page-block-small">
@@ -11,7 +13,13 @@
                 <div class="rightText">
                     <a href="@Url.Action("Index", "Home")" title="Home">Home</a>
                     / <a href="@Url.Action("Index", "Product")" title="Home">Products</a> /
-                    <label id="lblProductName" class=""></label>
+                    @if (Model != null)
+                    {
+                        if ((Model.ProductHeaderInfo != null) && (Model.ProductHeaderInfo.ProductName != ""))
+                        {
+                            @Html.DisplayFor(m => m.ProductHeaderInfo.ProductName)
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -25,20 +33,50 @@
             <div class="col-lg-8">
                 <div class="portfolio-details-slider swiper">
                     <div class="swiper-wrapper align-items-center" id="lstProdImgList">
+                        @if (Model != null)
+                        {
+                            foreach (var mItem in Model.ProductImageList)
+                            {
+                                <div class='swiper-slide'>
+                                    <img src="@Url.Content(@mItem.ProductImgPath)" alt=''>
+                                </div>
+                            }
+                        }
                     </div>
-
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="portfolio-info" id="lstProdInfo">
+                    <h3>Product Information</h3>
+                    @if (Model != null)
+                    {
+                        <ul>
+                            @if (Model.ProductHeaderInfo != null)
+                            {
+                                <li><strong>Product Name</strong>: @Model.ProductHeaderInfo.ProductName</li>
+                                <li><strong>Brand Name</strong>: @Model.ProductHeaderInfo.BrandName</li>
+                                <li><strong>Category</strong>: @Model.ProductHeaderInfo.CategoryName</li>
+                            }
+                            @foreach (var mItem in Model.ProductKeyInfo)
+                            {
+                                <li><strong>@mItem.KeyName</strong>: @mItem.KeyValue</li>
+                            }
+                        </ul>
+                    }
                 </div>
-                <div id="portfoliodescription" runat="server" class="portfolio-description">
-                    <h2>Description</h2>
-                    <p>
-                        <label id="lblProdDesc" class=""></label>
-                    </p>
-                </div>
+                @if (Model != null)
+                {
+                    if ((Model.ProductHeaderInfo != null) && (Model.ProductHeaderInfo.ProductDesc != ""))
+                    {
+                        <div class="portfolio-description">
+                            <h2></h2>
+                            <p>
+                                @Html.DisplayFor(m => Model.ProductHeaderInfo.ProductDesc)
+                            </p>
+                        </div>
+                    }
+                }
             </div>
         </div>
         <div class="row gy-4" id="progressTag" style="display: none; height: 180px;">
@@ -47,64 +85,3 @@
         </div>
     </div>
 </section><!-- End Portfolio Details Section -->
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('#portfoliodescription').hide();
-
-        $('#progressTag').show();
-        $('#elementTag').hide();
-
-         GetProductDetails();
-
-    });
-
-    function GetProductDetails() {
-
-
-
-        var getProductDetailsURL = '@Url.Action("GetProductInfo", "Product")';
-        var sProductID = '';
-         if ('@ViewData["ProductID"]' != '') {
-             sProductID = '@ViewData["ProductID"]';
-        }
-
-        $.ajax(
-            {
-                type: 'GET',
-                url: getProductDetailsURL,
-                data: { "ProductID": sProductID },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    //console.log(result);
-
-                    setTimeout(function () {
-
-                        $('#progressTag').hide();
-                        $('#elementTag').show();
-
-                        if (result.ResponseSuccess == true) {
-                            //alert(result.ProductName);
-                            $('#lblProductName').html(result.ProductName);
-                            $('#lstProdImgList').html(result.ProductImageList);
-                            $('#lstProdInfo').html(result.ProductInformation);
-
-                            if (result.ProductDesc.length != 0) {
-                                $('#portfoliodescription').show();
-                                $('#lblProdDesc').html(result.ProductDesc);
-                            }
-                        }
-                        else {
-                            //alert(result.ResponseMessage);
-                        }
-
-
-                    }, 2000);
-
-                },
-            });
-    }
-
-</script>

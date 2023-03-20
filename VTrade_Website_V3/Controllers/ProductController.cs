@@ -191,8 +191,58 @@ namespace VTrade_Website_V3.Controllers
         [EncryptedActionParameter]
         public ActionResult ProductDetail(int ProductID)
         {
-            ViewData["ProductID"] = ProductID;
-            return View();
+            ProductInfoResponseData res = new ProductInfoResponseData();
+            Methods Repobj = new Methods();
+
+            //get Product Image List
+            _getProductImageList _getProductImageListObj = new _getProductImageList();
+            _getProductImageListObj = Repobj.getProductImageItems(ProductID);
+            List<ProductImageList> ProductImageListObj = new List<ProductImageList>();
+
+            if (_getProductImageListObj.ResponseStatus == true)
+            {
+                ProductImageListObj = _getProductImageListObj.lstProductImageList;
+                if (ProductImageListObj != null)
+                {
+                    res.ProductImageList = ProductImageListObj;
+                }
+            }
+
+            //get Product Header Info
+            _getProductItems _getProductItemsObj = new _getProductItems();
+
+            var ProdID_List = new int[1];
+            ProdID_List[0] = ProductID;
+
+            _getProductItemsObj = Repobj.getProductItemsbyID(ProdID_List);
+
+            if (_getProductItemsObj.ResponseStatus == true)
+            {
+                List<ProductListInfo> ProductInfoObj = new List<ProductListInfo>();
+                ProductInfoObj = _getProductItemsObj.lstProductItem;
+
+                if ((ProductInfoObj != null) && (ProductInfoObj.Count > 0))
+                {
+                    res.ProductHeaderInfo = ProductInfoObj[0];
+                }
+            }
+
+            //get Key Name and Key value
+            _getProductInfo _getProductInfoObj = new _getProductInfo();
+            _getProductInfoObj = Repobj.getProductInfo(ProductID);
+
+            if (_getProductInfoObj.ResponseStatus == true)
+            {
+                List<ProductInfo> ProductInfoObj = new List<ProductInfo>();
+                ProductInfoObj = _getProductInfoObj.lstProductInfo;
+
+                if (ProductInfoObj != null)
+                {
+                    res.ProductKeyInfo = ProductInfoObj;
+                }
+            }
+
+            return View(res);
         }
 
         [HttpGet]
@@ -240,91 +290,6 @@ namespace VTrade_Website_V3.Controllers
 
             return PartialView("GetProductListItems", res);
 
-        }
-
-        [HttpGet]
-        public JsonResult GetProductInfo(int ProductID)
-        {
-            ProductInfoResponseData res = new ProductInfoResponseData();
-            try
-            {
-                string str_responseImageData = "";
-                string str_responseProductInfo = "";
-
-                Methods Repobj = new Methods();
-                _getProductImageList _getProductImageListObj = new _getProductImageList();
-                _getProductImageListObj = Repobj.getProductImageItems(ProductID);
-
-                if (_getProductImageListObj.ResponseStatus == true)
-                {
-                    List<ProductImageList> lstObj = new List<ProductImageList>();
-                    lstObj = _getProductImageListObj.lstProductImageList;
-
-                    if (lstObj != null)
-                    {
-                        foreach (var ProdImgInfoItem in lstObj)
-                        {
-                            str_responseImageData += "<div class='swiper-slide'><img src='" + ProdImgInfoItem.ProductImgPath + "' alt=''></div>";
-                        }
-                    }
-                }
-
-                _getProductItems _getProductItemsObj = new _getProductItems();
-
-                var ProdID_List = new int[1];
-                ProdID_List[0] = ProductID;
-
-                _getProductItemsObj = Repobj.getProductItemsbyID(ProdID_List);
-
-                if (_getProductItemsObj.ResponseStatus == true)
-                {
-                    List<ProductListInfo> ProductInfoObj = new List<ProductListInfo>();
-                    ProductInfoObj = _getProductItemsObj.lstProductItem;
-
-                    if ((ProductInfoObj != null) && (ProductInfoObj.Count > 0))
-                    {
-                        res.ProductName = ProductInfoObj[0].ProductName;
-                        res.ProductDesc = ProductInfoObj[0].ProductDesc;
-
-                        str_responseProductInfo += "<h3>Product Information</h3>";
-                        str_responseProductInfo += "<ul>";
-                        str_responseProductInfo += "<li><strong>Product Name</strong>: " + ProductInfoObj[0].ProductName + "</li>";
-                        str_responseProductInfo += "<li><strong>Brand Name</strong>: " + ProductInfoObj[0].BrandName + "</li>";
-                        str_responseProductInfo += "<li><strong>Category</strong>: " + ProductInfoObj[0].CategoryName + "</li>";
-
-
-                        _getProductInfo _getProductInfoObj = new _getProductInfo();
-                        _getProductInfoObj = Repobj.getProductInfo(ProductID);
-
-                        if (_getProductInfoObj.ResponseStatus == true)
-                        {
-                            List<ProductInfo> lstObj = new List<ProductInfo>();
-                            lstObj = _getProductInfoObj.lstProductInfo;
-
-                            if (lstObj != null)
-                            {
-                                foreach (var ProdInfoItem in lstObj)
-                                {
-                                    str_responseProductInfo += "<li><strong>" + ProdInfoItem.KeyName + "</strong>: " + ProdInfoItem.KeyValue + "</li>";
-                                }
-                            }
-                        }
-
-                        str_responseProductInfo += "</ul>";
-                    }
-
-                }
-
-                res.ProductImageList = str_responseImageData;
-                res.ProductInformation = str_responseProductInfo;
-                res.ResponseSuccess = true;
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
     }
