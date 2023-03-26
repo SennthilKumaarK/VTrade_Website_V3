@@ -62,7 +62,7 @@
 
     foreach (var mItem in Model.lstBrandItem)
     {
-        <div class='col-lg-4 col-md-6 Brand-item'>
+        <div class='col-lg-3 col-md-6 Brand-item'>
 
             @Html.EncodedInnerHtmlActionLink("<img src='" + mItem.BrandImgPath + "' class='img-Brand' alt=''/>", "Index", "Product", new { BrandID = mItem.ID }, null)
             <div class='Brand-info'>

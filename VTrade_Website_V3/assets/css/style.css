@@ -184,6 +184,7 @@ h6 {
     transition: all 0.5s;
     color: #fff;
     padding: 0;
+    z-index:999;
 }
 
     #topbar .contact-info i {
@@ -226,14 +227,14 @@ h6 {
     background: #fff;
     transition: all 0.5s;
     z-index: 997;
-    height: 86px;
+    height: 120px;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #B7A318;
-    padding: 0px !important;
+    padding: 50px 0px 0px 0px !important;
 }
 
     #header.fixed-top {
-        height: 70px;
+        height: 120px;
     }
 
     #header .logo {
@@ -444,6 +445,7 @@ h6 {
         position: absolute;
         top: 15px;
         right: 15px;
+        z-index:9999;
     }
 
     .navbar-mobile ul {
@@ -709,7 +711,7 @@ section {
 
 @media (min-width: 1024px) {
     .section-title p {
-        width: 80%;
+        width: 95%;
         text-align: justify;
     }
 }
@@ -2060,7 +2062,7 @@ section {
 }
 
 .img-Brand {
-    width: 400px;
+    width: 300px;
     height: 200px;
     font-weight: 400;
     border: 0;
@@ -2726,6 +2728,10 @@ section {
     #whyvtrade .section-title p {
         font-size: 22px;
     }
+
+    .Brand .Brand-item .Brand-info {
+        width: 85% !important;
+    }
 }
 
 @media (min-width: 401px) and (max-width: 500px) {
@@ -2744,6 +2750,10 @@ section {
 
     .portfolio-item-index .imgProduct {
         margin-left: 18%;
+    }
+
+    .Brand .Brand-item .Brand-info {
+        width: 85% !important;
     }
 }
 
@@ -2780,6 +2790,10 @@ section {
     .category-bg, .products-bg {
         background-size: auto;
         background-repeat: repeat;
+    }
+
+    .Brand .Brand-item .Brand-info {
+        width: 85% !important;
     }
 }
 
@@ -2826,6 +2840,10 @@ section {
         background-size: auto;
         background-repeat: repeat;
     }
+
+    .Brand .Brand-item .Brand-info {
+        width: 70% !important;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 991px) {
@@ -2846,12 +2864,30 @@ section {
         background-size: auto;
         background-repeat: repeat;
     }
+
+    .Brand .Brand-item .Brand-info {
+        width: 65% !important;
+    }
+
+    .img-Brand {
+        width: 215px;
+        height: 170px;
+    }
 }
 
 @media (min-width: 991px) and (max-width: 1200px) {
 
     .portfolio-item-index .imgProduct {
         margin-left: 2%;
+    }
+
+    .Brand .Brand-item .Brand-info {
+        width: 100% !important;
+    }
+
+    .img-Brand {
+        width: 215px;
+        height: 170px;
     }
 }
 
@@ -2998,7 +3034,7 @@ section {
         color: #fff;
         font-weight: 600;
         color: #222222;
-        width: 60%;
+        width: 100%;
     }
 
 hgroup {

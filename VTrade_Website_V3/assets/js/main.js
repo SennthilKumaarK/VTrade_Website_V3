@@ -60,6 +60,44 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
+    /**
+   * Scrolls to an element with topbar offset
+   */
+    const scrolltotopbar = (el) => {
+        let header = select('#topbar')
+        let offset = header.offsetHeight
+
+        if (!header.classList.contains('header-scrolled')) {
+            offset -= 16
+        }
+
+        let elementPos = select(el).offsetTop
+        window.scrollTo({
+            top: elementPos - offset,
+            behavior: 'smooth'
+        })
+    }
+
+    /**
+     * topbar fixed top on scroll
+     */
+    let selecttopbar = select('#topbar')
+    if (selecttopbar) {
+        let headerOffset = selecttopbar.offsetTop
+        let nextElement = selecttopbar.nextElementSibling
+        const headerFixed = () => {
+            if ((headerOffset - window.scrollY) <= 0) {
+                selecttopbar.classList.add('fixed-top')
+                //nextElement.classList.add('scrolled-offset')
+            } else {
+                selecttopbar.classList.remove('fixed-top')
+                //nextElement.classList.remove('scrolled-offset')
+            }
+        }
+        window.addEventListener('load', headerFixed)
+        onscroll(document, headerFixed)
+    }
+
   /**
    * Scrolls to an element with header offset
    */

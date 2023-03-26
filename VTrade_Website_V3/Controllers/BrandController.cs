@@ -23,7 +23,7 @@ namespace VTrade_Website_V3.Controllers
             List<BrandItem> lstObj = new List<BrandItem>();
 
             _getBrandListItems _getBrandItemsObj = new _getBrandListItems();
-            _getBrandItemsObj = Repobj.getBrandListItems(PageNO, 6);
+            _getBrandItemsObj = Repobj.getBrandListItems(PageNO, 16);
 
             if (_getBrandItemsObj.ResponseStatus == true)
             {
